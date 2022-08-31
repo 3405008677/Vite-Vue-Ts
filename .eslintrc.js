@@ -1,8 +1,23 @@
 module.exports = {
-  parser: "vue-eslint-parser",
+  env: {
+    browser: true,
+    es2021: true,
+    node: true
+  },
+  extends: [
+    'plugin:vue/essential',
+    'standard',
+    // 新增这里vue3支持
+    'plugin:vue/vue3-recommended'
+  ],
   parserOptions: {
-    "ecmaVersion": 7,
-    "sourceType": "module"
+    ecmaVersion: 7,
+    sourceType: "module",
+    ecmaFeatures: {
+      modules: true
+    },
+    parser: "vue-eslint-parser",
+
   },
   plugins: ['vue'],
   rules: {
@@ -44,6 +59,8 @@ module.exports = {
 
     "vue/attribute-hyphenation": "off",
     // 禁止使用 debugger
-    "no-debugger": "off"
+    "no-debugger": "off",
+    //
+    "vue/multi-word-component-names": "off"
   }
 }
