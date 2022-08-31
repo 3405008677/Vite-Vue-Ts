@@ -1,16 +1,16 @@
 <template>
-  <section>
+  <section id="app">
     <Suspense>
       <!--  -->
       <template #default>
         <router-view v-slot="{ Component, route }">
           <transition>
-            <template>
+            <div>
               <keep-alive>
                 <component :is="Component" :key="route.path" v-if="route.meta.keepAlive" />
               </keep-alive>
               <component :is="Component" :key="route.path" v-if="!route.meta.keepAlive" />
-            </template>
+            </div>
           </transition>
         </router-view>
       </template>

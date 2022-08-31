@@ -9,7 +9,7 @@ const router = createRouter({
  * 添加动态路由
  * @param router
  */
-const addRouter = router => { }
-
-
+const addRoute = (routes) => {
+  // if
+}
 export default router

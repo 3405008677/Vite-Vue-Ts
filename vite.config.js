@@ -23,9 +23,9 @@ const viteConfig = defineConfig(({ mode }) => {
   return {
     publicDir: "public",
     plugins: [vue(),
-    eslintPlugin({
-      cache: false
-    }),
+    // eslintPlugin({
+    //   cache: false
+    // }),
     viteCompression(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
