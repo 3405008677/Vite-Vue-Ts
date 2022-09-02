@@ -1,28 +1,39 @@
-export default [{
-  path: '/',
-  meta: {
-    title: '首页',
-    isHide: true,
-    keepAlive: false
+export default [
+  {
+    path: '/',
+    meta: {
+      title: '首页',
+      isHide: true,
+      keepAlive: false
+    },
+    component: () => import('@/views/home.vue')
   },
-  component: () => import('@/views/home.vue')
-},
-{
-  path: '/login',
-  meta: {
-    title: '登录',
-    keepAlive: false
-
+  {
+    path: '/login',
+    meta: {
+      title: '登录',
+      needLogin: false,
+      keepAlive: false
+    },
+    component: () => import('@/views/login.vue')
   },
-  component: () => import('@/views/login.vue')
-},
-{
-  path: '/404',
-  name: 'notFound',
-  meta: {
-    title: '404 Not Found!',
-    keepAlive: false
-
+  {
+    path: '/404',
+    name: 'notFound',
+    meta: {
+      title: '404 Not Found!',
+      needLogin: false,
+      keepAlive: false
+    },
+    component: () => import('@/views/404.vue')
   },
-  component: () => import('@/views/404.vue')
-}]
+  {
+    path: '/401',
+    name: 'noPower',
+    meta: {
+      title: '无权访问',
+      keepAlive: false
+    },
+    component: () => import('@/views/401.vue')
+  }
+]

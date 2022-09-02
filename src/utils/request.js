@@ -49,49 +49,49 @@ request.interceptors.response.use(
         ElNotification({
           title: "0",
           message: '无法连接服务器',
-          type: 'warning',
+          type: 'error',
         })
         break;
       case 302:
         ElNotification({
           title: "302",
           message: '登录过期',
-          type: 'warning',
+          type: 'error',
         })
         break;
       case 401:
         ElNotification({
           title: "401",
           message: '未验证的用户',
-          type: 'warning',
+          type: 'error',
         })
         break;
       case 403:
         ElNotification({
           title: "403",
           message: '资源拒绝访问',
-          type: 'warning',
+          type: 'error',
         })
         break;
       case 404:
         ElNotification({
           title: "404",
           message: '服务资源不存在',
-          type: 'warning',
+          type: 'error',
         })
         break;
       case 500:
         ElNotification({
           title: "500",
           message: '服务运行错误',
-          type: 'warning',
+          type: 'error',
         })
         break;
       case 504:
         ElNotification({
           title: "504",
           message: '代理访问错误',
-          type: 'warning',
+          type: 'error',
         })
         break;
     }
