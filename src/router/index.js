@@ -57,6 +57,8 @@ const getRoute = () => {
 router.beforeEach((to, from, next) => {
   nProgress.start()
   const token = Session.get('token')
+  console.log(router.hasRoute(to.name))
+  console.log(to.matched)
   if (token) {
     if (to.path === '/login') {
       ElNotification({
@@ -67,7 +69,7 @@ router.beforeEach((to, from, next) => {
       return next(from.path)
     }
     // 判断路由是否存在
-    if (!to.matched.length) {
+    if (!router.hasRoute(to.name)) {
       ElNotification({
         title: '路由不存在',
         message: '别瞎点了！',
@@ -78,7 +80,7 @@ router.beforeEach((to, from, next) => {
     return next()
   } else {
     // 判断路由是否存在
-    if (!to.matched.length) {
+    if (!router.hasRoute(to.name)) {
       ElNotification({
         title: '路由不存在',
         message: '别瞎点了，老实登录去吧！',
