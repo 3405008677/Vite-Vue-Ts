@@ -34,6 +34,7 @@ export default [
     name: 'noPower',
     meta: {
       title: '无权访问',
+      needLogin: false,
       keepAlive: false
     },
     component: () => import('@/views/401.vue')

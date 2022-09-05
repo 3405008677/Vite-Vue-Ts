@@ -23,4 +23,10 @@
 
 <script setup></script>
 
-<style></style>
+<style lang="scss">
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+</style>

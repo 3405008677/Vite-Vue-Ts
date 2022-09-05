@@ -9,7 +9,7 @@ import { resolve } from 'path'
 import viteCompression from 'vite-plugin-compression'
 
 // 定义resolve
-const pathResolve = (dir) => {
+const pathResolve = dir => {
   return resolve(__dirname, '.', dir)
 }
 
@@ -21,18 +21,18 @@ let env = undefined
 const viteConfig = defineConfig(({ mode }) => {
   env = loadEnv(mode, process.cwd())
   return {
-    publicDir: "public",
-    plugins: [vue(),
-    // eslintPlugin({
-    //   cache: false
-    // }),
-    viteCompression(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    })],
+    publicDir: 'public',
+    plugins: [
+      vue(),
+      eslintPlugin({}),
+      viteCompression(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
+    ],
     resolve: {
       alias,
       extentsions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
@@ -41,13 +41,13 @@ const viteConfig = defineConfig(({ mode }) => {
       host: true,
       port: env.VITE_PORT,
       proxy,
-      strictPort: false,  //若端口占用，尝试下一个
+      strictPort: false //若端口占用，尝试下一个
     },
     // 打包配置
     build: {
       target: 'modules', //兼容性
       reportCompressedSize: true, //启用gzip压缩大小报告-可关闭
-      minify: 'sebuild',  //混淆器
+      minify: 'sebuild', //混淆器
       sourcemap: false
     }
   }
@@ -58,14 +58,14 @@ const proxy = () => ({
   [env.VITE_PROXY_API]: {
     target: env.VITE_PROXY,
     changeOrigin: true,
-    rewrite: (path) => path.replace(/^\/api/, ''),
+    rewrite: path => path.replace(/^\/api/, ''),
     headers: {
       Referer: env.VITE_PROXY
     },
     // 是否开启安全证书校验（https时关闭）
     secure: false,
     // 如果希望同时代理WebSocket接口,设置为true
-    ws: false,
+    ws: false
   }
 })
 

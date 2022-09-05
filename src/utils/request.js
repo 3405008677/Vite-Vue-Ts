@@ -17,9 +17,9 @@ let loading
 request.interceptors.request.use(
   (config) => {
     // 请求前判断
-    const userStore = getToken()
+    const userToken = getToken()
     if (userStore) {
-      config.headers['Authorization'] = `Bearer ${userStore}`
+      config.headers['Authorization'] = `Bearer ${userToken}`
     }
     // 
     loading = ElLoading.service({
