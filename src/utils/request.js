@@ -21,11 +21,6 @@ request.interceptors.request.use(
     if (userStore) {
       config.headers['Authorization'] = `Bearer ${userToken}`
     }
-    // 
-    loading = ElLoading.service({
-      text: '拼命加载中...',
-      background: 'rgba(178,215,173,1)'
-    })
     return config
   },
   (err) => {
@@ -36,13 +31,11 @@ request.interceptors.request.use(
 // 响应拦截器
 request.interceptors.response.use(
   response => {
-    if (loading) loading.close()
     const { data } = response
     if (data.success) return data
     data.errCode
   },
   err => {
-    if (loading) loading.close()
     const { status } = error.response
     switch (status) {
       case 0:

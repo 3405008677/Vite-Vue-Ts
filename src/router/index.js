@@ -56,6 +56,10 @@ const getRoute = () => {
  */
 router.beforeEach((to, from, next) => {
   nProgress.start()
+  loading = ElLoading.service({
+    text: '拼命加载中...',
+    background: 'rgba(178,215,173,1)'
+  })
   const token = Session.get('token')
   console.log(router.hasRoute(to.name))
   console.log(to.matched)
@@ -109,6 +113,7 @@ router.beforeEach((to, from, next) => {
  */
 router.afterEach((to, from) => {
   nProgress.done()
+  loading.close()
 })
 
 export default router

@@ -1,2 +1,23 @@
 /* 初始化样式
 ------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
+:root {
+  --next-bg-main-color: #f8f8f8;
+  --next-hq-main-color: #0099ff;
+  --next-bg-color: #f5f5ff;
+  --next-border-color-light: #f1f2f3;
+  --next-color-primary-lighter: #ecf5ff;
+  --next-color-dark-hover: #0000001a;
+  --next-color-menu-hover: rgba(0, 0, 0, 0.1);
+  --next-color-user-hover: rgba(0, 0, 0, 0.04);
+  --next-color-seting-main: #e9eef3;
+  --next-color-seting-aside: #d3dce6;
+  --next-color-seting-header: #b3c0d1;
+}
