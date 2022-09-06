@@ -10,8 +10,6 @@ const request = axios.create({
   headers: {}
 })
 
-// 加载动画
-let loading
 
 // 请求拦截器
 request.interceptors.request.use(
