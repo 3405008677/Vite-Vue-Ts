@@ -1,8 +1,20 @@
 <template>
   <p>Login</p>
+  <el-button type="primary" @click="one()">Primary</el-button>
 </template>
 
-<script setup></script>
+<script setup>
+const one = () => {
+  // document.documentElement 是全局变量时
+  const el = document.documentElement
+  // const el = document.getElementById('xxx')
+  console.log(el)
+  // 获取 css 变量
+  getComputedStyle(el).getPropertyValue(`--el-color-primary`)
+  // 设置 css 变量
+  el.style.setProperty('--el-color-primary', 'red')
+}
+</script>
 
 <style scoped lang="scss">
 .login {

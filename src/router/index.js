@@ -11,6 +11,11 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: staticRouter
 })
+
+
+// 加载动画
+let loading
+
 /**
  * 添加动态路由
  * @param routes
