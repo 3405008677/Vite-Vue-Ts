@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="v-canvas" :width="Width" :height="Height"></canvas>
+    <canvas id="v-canvas" :width="contentWidth" :height="contentHeight"></canvas>
   </div>
 </template>
 
@@ -62,6 +62,25 @@ const randomNum = (min, max) => {
       g = randomNum(min, max),
       b = randomNum(min, max)
     return `rgb(${r},${g},${b})`
+  },
+  drawText = (ctx, txt, i) => {
+    // 随机生成字体颜色
+    ctx.fillStyle = randomColor(50, 160)
+    ctx.font = randomNum (props.fontSizeMin,props.fontSizeMax)
+  },
+  //
+  drawPic = () => {
+    let canvas = document.getElementById('v-canvas')
+    let ctx = canvas.getContext('2d')
+    ctx.textBaseline = 'bottom'
+    // 绘制背景
+    ctx.fillStyle = '#e6ecfd'
+    ctx.fillRect(0, 0, props.contentWidth, props.contentHeight)
+    // 绘制文字
+    for (let i = 0; i < props.idenifyCode; i++) {
+      drawText(ctx, props.idenifyCode[i], i)
+    }
+    drawLine(ctx)
+    drawDot(ctx)
   }
-  // 
 </script>
