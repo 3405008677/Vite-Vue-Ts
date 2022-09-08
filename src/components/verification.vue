@@ -5,8 +5,10 @@
 </template>
 
 <script setup>
+import { watch } from 'vue'
+
 const props = defineProps({
-  idenifyCode: {
+  identifyCode: {
     // 默认注册码
     type: String,
     default: '1234'
@@ -66,7 +68,27 @@ const randomNum = (min, max) => {
   drawText = (ctx, txt, i) => {
     // 随机生成字体颜色
     ctx.fillStyle = randomColor(50, 160)
-    ctx.font = randomNum (props.fontSizeMin,props.fontSizeMax)
+    // 随机生成字体大小
+    ctx.font = randomNum(props.fontSizeMin, props.fontSizeMax)
+    let x = (i + 1) * (props.contentWidth / (props.idenifyCode.length + 1)),
+      y = randomNum(props.fontSizeMax, props.contentHeight - 5),
+      deg = randomNum(-30, 30)
+    ctx.translate(x, y)
+    ctx.rotate((deg * Math.PI) / 180)
+    ctx.fillText(txt, 0, 0)
+    // 恢复坐标原点和旋转角度
+    ctx.rotate((-deg * Math.PI) / 180)
+    ctx.translate(-x, -y)
+  },
+  drawLine = ctx => {
+    // 绘制干扰线
+    for (let i = 0; i < 4; i++) {
+      ctx.strokeStyle = randomColor(100, 200)
+      ctx.beginPath()
+      ctx.moveTo(randomNum(0, props.contentWidth), randomNum(0, props.contentHeight))
+      ctx.lineTo(randomNum(0, props.contentWidth), randomNum(0, props.contentHeight))
+      ctx.stroke()
+    }
   },
   //
   drawPic = () => {
@@ -83,4 +105,11 @@ const randomNum = (min, max) => {
     drawLine(ctx)
     drawDot(ctx)
   }
+watch(
+  () => props.identifyCode,
+  (newV, oldV) => {
+    drawPic()
+  }
+)
+drawPic()
 </script>
