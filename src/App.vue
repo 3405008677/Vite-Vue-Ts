@@ -5,7 +5,7 @@
       <template #default>
         <router-view v-slot="{ Component, route }">
           <transition>
-            <div>
+            <div style="height: 100%">
               <keep-alive>
                 <component :is="Component" :key="route.path" v-if="route.meta.keepAlive" />
               </keep-alive>
@@ -23,10 +23,4 @@
 
 <script setup></script>
 
-<style lang="scss">
-*{
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
-}
-</style>
+<style lang="scss"></style>

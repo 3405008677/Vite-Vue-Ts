@@ -1,2 +1,9 @@
+// 通用样式
 @use './app.scss';
 @use './transition.scss';
+@use './base.scss';
+@use './common.scss';
+@use './loading.scss';
+
+//自定义变量
+@use './variables.scss';
