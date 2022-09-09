@@ -1,5 +1,5 @@
 <template>
-  <div @click="replaceValue">
+  <div @click="replaceValue" class="myCanvas">
     <canvas
       id="v-canvas"
       :width="contentWidth"
@@ -171,3 +171,11 @@ onMounted(() => {
   drawPic();
 });
 </script>
+
+<style scoped>
+  .myCanvas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
