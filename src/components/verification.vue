@@ -1,115 +1,173 @@
 <template>
-  <div>
-    <canvas id="v-canvas" :width="contentWidth" :height="contentHeight"></canvas>
+  <div @click="replaceValue">
+    <canvas
+      id="v-canvas"
+      :width="contentWidth"
+      :height="contentHeight"
+    ></canvas>
   </div>
 </template>
 
 <script setup>
-import { watch } from 'vue'
+import { onMounted, ref, watchEffect, watch } from "vue";
 
+const emit = defineEmits(["update:modelValue"]);
 const props = defineProps({
-  identifyCode: {
+  modelValue: {
     // 默认注册码
     type: String,
-    default: '1234'
+    default: "1234",
+  },
+  types: {
+    // 验证码类型
+    type: String,
+    default: "default",
   },
   fontSizeMin: {
     // 字体最小值
     type: Number,
-    default: 25
+    default: 25,
   },
   fontSizeMax: {
     // 字体最大值
     type: Number,
-    default: 25
+    default: 35,
   },
   backgroundColorMin: {
     // 验证码图片背景色最小值
     type: Number,
-    default: 200
+    default: 200,
   },
   backgroundColorMax: {
     // 验证码图片背景色最大值
     type: Number,
-    default: 220
+    default: 220,
   },
   dotColorMin: {
     // 背景干扰点最小值
     type: Number,
-    default: 60
+    default: 60,
   },
   dotColorMax: {
     // 背景干扰点最大值
     type: Number,
-    default: 120
+    default: 120,
   },
   contentWidth: {
     // 容器宽度
     type: Number,
-    default: 90
+    default: 90,
   },
   contentHeight: {
     // 容器高度
     type: Number,
-    default: 38
-  }
-})
+    default: 38,
+  },
+});
+let codeType = "";
+switch (props.types) {
+  case "default":
+    codeType = "1234567890abcdefjhijklinopqrsduvwxyz";
+    break;
+  case "number":
+    codeType = "1234567890";
+    break;
+  case "string":
+    codeType = "abcdefjhijklinopqrsduvwxyz";
+    break;
+  default:
+    break;
+}
 // 生成一个随机数
 const randomNum = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min)
+    return Math.floor(Math.random() * (max - min) + min);
   },
   // 生成一个随机颜色
   randomColor = (min, max) => {
     let r = randomNum(min, max),
       g = randomNum(min, max),
-      b = randomNum(min, max)
-    return `rgb(${r},${g},${b})`
+      b = randomNum(min, max);
+    return `rgb(${r},${g},${b})`;
   },
   drawText = (ctx, txt, i) => {
     // 随机生成字体颜色
-    ctx.fillStyle = randomColor(50, 160)
+    ctx.fillStyle = randomColor(50, 160);
     // 随机生成字体大小
-    ctx.font = randomNum(props.fontSizeMin, props.fontSizeMax)
-    let x = (i + 1) * (props.contentWidth / (props.idenifyCode.length + 1)),
+    ctx.font = `${randomNum(props.fontSizeMin, props.fontSizeMax)}px serif`;
+    let x = (i + 1) * (props.contentWidth / (props.modelValue.length + 1)),
       y = randomNum(props.fontSizeMax, props.contentHeight - 5),
-      deg = randomNum(-30, 30)
-    ctx.translate(x, y)
-    ctx.rotate((deg * Math.PI) / 180)
-    ctx.fillText(txt, 0, 0)
+      deg = randomNum(-30, 30);
+    ctx.translate(x, y);
+    ctx.rotate((deg * Math.PI) / 180);
+    ctx.fillText(txt, 0, 0);
     // 恢复坐标原点和旋转角度
-    ctx.rotate((-deg * Math.PI) / 180)
-    ctx.translate(-x, -y)
+    ctx.rotate((-deg * Math.PI) / 180);
+    ctx.translate(-x, -y);
   },
-  drawLine = ctx => {
-    // 绘制干扰线
+  // 绘制干扰线
+  drawLine = (ctx) => {
     for (let i = 0; i < 4; i++) {
-      ctx.strokeStyle = randomColor(100, 200)
-      ctx.beginPath()
-      ctx.moveTo(randomNum(0, props.contentWidth), randomNum(0, props.contentHeight))
-      ctx.lineTo(randomNum(0, props.contentWidth), randomNum(0, props.contentHeight))
-      ctx.stroke()
+      ctx.strokeStyle = randomColor(100, 200);
+      ctx.beginPath();
+      ctx.moveTo(
+        randomNum(0, props.contentWidth),
+        randomNum(0, props.contentHeight)
+      );
+      ctx.lineTo(
+        randomNum(0, props.contentWidth),
+        randomNum(0, props.contentHeight)
+      );
+      ctx.stroke();
     }
   },
-  //
-  drawPic = () => {
-    let canvas = document.getElementById('v-canvas')
-    let ctx = canvas.getContext('2d')
-    ctx.textBaseline = 'bottom'
-    // 绘制背景
-    ctx.fillStyle = '#e6ecfd'
-    ctx.fillRect(0, 0, props.contentWidth, props.contentHeight)
-    // 绘制文字
-    for (let i = 0; i < props.idenifyCode; i++) {
-      drawText(ctx, props.idenifyCode[i], i)
+  // 绘制干扰点
+  drawDot = (ctx) => {
+    for (let i = 0; i < 20; i++) {
+      ctx.fillStyle = randomColor(0, 255);
+      ctx.beginPath();
+      ctx.arc(
+        randomNum(0, props.contentWidth),
+        randomNum(0, props.contentHeight),
+        1,
+        0,
+        2 * Math.PI
+      );
+      ctx.fill();
     }
-    drawLine(ctx)
-    drawDot(ctx)
-  }
-watch(
-  () => props.identifyCode,
-  (newV, oldV) => {
-    drawPic()
-  }
-)
-drawPic()
+  },
+  makeCode = (len) => {
+    let str = "";
+    for (let i = 0; i < len; i++) {
+      str += codeType[randomNum(0, codeType.length)];
+    }
+    console.log("srt", str);
+    emit("update:modelValue", str);
+  },
+  //创建实例
+  drawPic = () => {
+    let canvas = document.getElementById("v-canvas");
+    let ctx = canvas.getContext("2d");
+    ctx.textBaseline = "bottom";
+    // 需要绘制的文字
+    makeCode(4);
+    // 绘制背景
+    ctx.fillStyle = "#e6ecfd";
+    ctx.fillRect(0, 0, props.contentWidth, props.contentHeight);
+    // 开始绘制文字
+    setTimeout(() => {
+      console.log("props.modelValue", props.modelValue);
+      for (let i = 0; i < props.modelValue.length; i++) {
+        drawText(ctx, props.modelValue[i], i);
+      }
+      drawLine(ctx);
+      drawDot(ctx);
+    }, 10);
+  };
+//刷新
+const replaceValue = () => {
+  drawPic();
+};
+onMounted(() => {
+  drawPic();
+});
 </script>

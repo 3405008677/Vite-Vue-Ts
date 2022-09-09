@@ -10,9 +10,22 @@
     <div class="login-content">
       <div class="login-content-main">
         <h4 class="login-content-title ml15">后台管理</h4>
-        <el-form ref="form" size="large" class="login-content-form" :model="formData" :rules="rules">
+        <el-form
+          ref="form"
+          size="large"
+          class="login-content-form"
+          :model="formData"
+          :rules="rules"
+        >
           <el-form-item prop="username" class="login-animation1">
-            <el-input v-model="formData.username" type="text" placeholder="请输入账号" clearable :readonly="readonlyInput.username" @focus="readonlyInput.username = !readonlyInput.username">
+            <el-input
+              v-model="formData.username"
+              type="text"
+              placeholder="请输入账号"
+              clearable
+              :readonly="readonlyInput.username"
+              @focus="readonlyInput.username = !readonlyInput.username"
+            >
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <user />
@@ -20,8 +33,14 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item class="login-animation2">
-            <el-input v-model="formData.passwd" :type="isShowPassword ? 'text' : 'password'" placeholder="请输入密码" :show-password="true" :readonly="readonlyInput.password" @focus="readonlyInput.password = !readonlyInput.password">
+          <el-form-item prop="password" class="login-animation2">
+            <el-input
+              v-model="formData.password"
+              placeholder="请输入密码"
+              show-password
+              :readonly="readonlyInput.password"
+              @focus="readonlyInput.password = !readonlyInput.password"
+            >
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <unlock />
@@ -29,9 +48,16 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item class="login-animation3">
+          <el-form-item prop="code" class="login-animation3">
             <el-col :span="15">
-              <el-input v-model="formData.code" type="text" maxlength="4" placeholder="验证码" clearable autocomplete="off">
+              <el-input
+                v-model="formData.code"
+                type="text"
+                maxlength="4"
+                placeholder="验证码"
+                clearable
+                autocomplete="off"
+              >
                 <template #prefix>
                   <el-icon class="el-input__icon">
                     <position />
@@ -41,11 +67,19 @@
             </el-col>
             <el-col :span="1"></el-col>
             <el-col :span="8">
-              <el-button class="login-content-code">1234</el-button>
+              <!-- <el-button class="login-content-code">1234</el-button> -->
+              <VerificationVue v-model="identifyCode" types="number" />
             </el-col>
           </el-form-item>
           <el-form-item class="login-animation4">
-            <el-button type="primary" class="login-content-submit" round :loading="isLoading" @click="onSignIn()">登录</el-button>
+            <el-button
+              type="primary"
+              class="login-content-submit"
+              round
+              :loading="isLoading"
+              @click="onSignIn()"
+              >登录
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -54,53 +88,83 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Session } from '@/utils/storage'
-import { useRouter } from 'vue-router'
+import { onMounted, ref } from "vue";
+import { Session } from "@/utils/storage";
+import { useRouter } from "vue-router";
+import VerificationVue from "@/components/verification.vue";
 
-const router = useRouter()
+const identifyCode = ref("");
+
+const router = useRouter();
 // 校验规则
 const rules = {
   username: [
-    { required: true, message: '请输入账号和', trigger: 'blur' },
-    { min: 3, max: 16, message: 'Length should be 1 to 16', trigger: 'blur' }
+    { required: true, message: "Please Enter User", trigger: "blur" },
+    {
+      min: 6,
+      max: 16,
+      message: "User Length Should be 6 to 16",
+      trigger: "blur",
+    },
   ],
-  passowrd: [
-    { required: true, message: '请输入账号和', trigger: 'blur' },
-    { min: 3, max: 16, message: 'Length should be 1 to 16', trigger: 'blur' }
-  ]
-}
+  password: [
+    { required: true, message: "Please Enter Password", trigger: "blur" },
+    {
+      min: 6,
+      max: 16,
+      message: "Password Length Should be 6 to 16",
+      trigger: "blur",
+    },
+  ],
+  code: [
+    { required: true, message: "Please Enter Verification", trigger: "blur" },
+    { len: 4, message: "Verification Length Should be 4", trigger: "blur" },
+    {
+      validator: (rule, value, callback) => {
+        console.log(value,identifyCode.value)
+        formData.value.code == identifyCode.value ? callback() : callback(new Error("Value Error Plase Retype"));
+      },
+      trigger: "blur",
+    },
+  ],
+};
 // 用户信息
 const formData = ref({
   // username: import.meta.env.VITE_WEB_ADMIN,
   // passwd: import.meta.env.VITE_WEB_PADD,
-  username: '',
-  passwd: ''
-})
+  username: "",
+  password: "",
+  code: "",
+});
 const form = ref(null),
   isLoading = ref(false),
   isShowPassword = ref(false),
   // 设置form不自动补全
   readonlyInput = ref({
     username: true,
-    password: true
-  })
-const signSuccess = () => {}
-const onSignIn = async e => {
-  isLoading.value = true
+    password: true,
+  });
+const signSuccess = () => {};
+const onSignIn = async (e) => {
+  isLoading.value = true;
   try {
-    await form.value.validate()
+    await form.value.validate();
     //发送登录请求
     // let { data } = await loginApi(formData.value)
     //存储token
-    Session.set('token', 123)
+    Session.set("token", 123);
     // 跳转主页
-    router.push({ name: 'home' })
-    isLoading.value = false
+    router.push({ name: "home" });
+    isLoading.value = false;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
+
+// onMounted(() => {});
+
+// 绘画验证码
+// makeCode(identifyCodes, 4);
 </script>
 
 <style scoped lang="scss">
@@ -134,7 +198,7 @@ const onSignIn = async e => {
     }
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: 0;
@@ -147,7 +211,7 @@ const onSignIn = async e => {
     }
 
     &::after {
-      content: '';
+      content: "";
       width: 150px;
       height: 300px;
       position: absolute;
@@ -200,6 +264,7 @@ const onSignIn = async e => {
       // 账号密码框
       .login-content-form {
         margin-top: 20px;
+
         @for $i from 1 through 4 {
           .login-animation#{$i} {
             opacity: 0;
