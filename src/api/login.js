@@ -1,16 +1,15 @@
-import request from '@utils/request'
+import request from "@/utils/request";
 
-
-
-export function loginIn (params) {
-  return request.post({
-    url: '/login',
-    data: params
-  })
-}
-
-// export function getUser (params) {
-//   return request.get({
-//     url
-//   })
-// }
+export default {
+  login(params) {
+    return request.post({
+      url: "/login",
+      data: params,
+    });
+  },
+  getMenus() {
+    return request.get({
+      url: "/getRouter",
+    });
+  },
+};

@@ -89,12 +89,11 @@
 <script setup>
 import { ref } from "vue";
 import { Session } from "@/utils/storage";
-import { useRouter } from "vue-router";
+import { useRouter ,useRoute} from "vue-router";
 import VerificationVue from "@/components/verification.vue";
 
-const identifyCode = ref("");
-
 const router = useRouter();
+const route = useRoute()
 // 校验规则
 const rules = {
   username: [
@@ -120,7 +119,6 @@ const rules = {
     { len: 4, message: "Verification Length Should be 4", trigger: "blur" },
     {
       validator: (rule, value, callback) => {
-        console.log(value, identifyCode.value);
         formData.value.code == identifyCode.value
           ? callback()
           : callback(new Error("Value Error Plase Retype"));
@@ -143,19 +141,31 @@ const form = ref(null),
   readonlyInput = ref({
     username: true,
     password: true,
-  });
+  }),
+  // 绑定验证码的值
+  identifyCode = ref("");
+
+// 登录成功后
+const signSuccess = ()=>{
+  // 登录成功跳转首页
+  console.log(route.query?.redirect,'route')
+
+}
+
+// 登录按钮
 const onSignIn = async (e) => {
   isLoading.value = true;
   try {
     await form.value.validate();
     //发送登录请求
     // let { data } = await loginApi(formData.value)
-    //存储token
+    存储token
     Session.set("token", 123);
-    // 跳转主页
+    跳转主页
     router.push({ name: "home" });
     isLoading.value = false;
   } catch (e) {
+    isLoading.value = false;
     console.log(e);
   }
 };
