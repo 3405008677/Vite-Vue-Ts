@@ -140,7 +140,6 @@ const randomNum = (min, max) => {
     for (let i = 0; i < len; i++) {
       str += codeType[randomNum(0, codeType.length)];
     }
-    console.log("srt", str);
     emit("update:modelValue", str);
   },
   //创建实例
@@ -155,7 +154,6 @@ const randomNum = (min, max) => {
     ctx.fillRect(0, 0, props.contentWidth, props.contentHeight);
     // 开始绘制文字
     setTimeout(() => {
-      console.log("props.modelValue", props.modelValue);
       for (let i = 0; i < props.modelValue.length; i++) {
         drawText(ctx, props.modelValue[i], i);
       }
