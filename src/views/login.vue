@@ -67,7 +67,6 @@
             </el-col>
             <el-col :span="1"></el-col>
             <el-col :span="8">
-              <!-- <el-button class="login-content-code">1234</el-button> -->
               <VerificationVue v-model="identifyCode" types="number" />
             </el-col>
           </el-form-item>
@@ -88,7 +87,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { Session } from "@/utils/storage";
 import { useRouter } from "vue-router";
 import VerificationVue from "@/components/verification.vue";
@@ -121,8 +120,10 @@ const rules = {
     { len: 4, message: "Verification Length Should be 4", trigger: "blur" },
     {
       validator: (rule, value, callback) => {
-        console.log(value,identifyCode.value)
-        formData.value.code == identifyCode.value ? callback() : callback(new Error("Value Error Plase Retype"));
+        console.log(value, identifyCode.value);
+        formData.value.code == identifyCode.value
+          ? callback()
+          : callback(new Error("Value Error Plase Retype"));
       },
       trigger: "blur",
     },
@@ -138,13 +139,11 @@ const formData = ref({
 });
 const form = ref(null),
   isLoading = ref(false),
-  isShowPassword = ref(false),
   // 设置form不自动补全
   readonlyInput = ref({
     username: true,
     password: true,
   });
-const signSuccess = () => {};
 const onSignIn = async (e) => {
   isLoading.value = true;
   try {
@@ -160,11 +159,6 @@ const onSignIn = async (e) => {
     console.log(e);
   }
 };
-
-// onMounted(() => {});
-
-// 绘画验证码
-// makeCode(identifyCodes, 4);
 </script>
 
 <style scoped lang="scss">
