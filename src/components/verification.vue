@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, nextTick } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 const props = defineProps({
@@ -143,7 +143,7 @@ const randomNum = (min, max) => {
     emit("update:modelValue", str);
   },
   //创建实例
-  drawPic = () => {
+  drawPic = async () => {
     let canvas = document.getElementById("v-canvas");
     let ctx = canvas.getContext("2d");
     ctx.textBaseline = "bottom";
@@ -153,13 +153,12 @@ const randomNum = (min, max) => {
     ctx.fillStyle = "#e6ecfd";
     ctx.fillRect(0, 0, props.contentWidth, props.contentHeight);
     // 开始绘制文字
-    setTimeout(() => {
-      for (let i = 0; i < props.modelValue.length; i++) {
-        drawText(ctx, props.modelValue[i], i);
-      }
-      drawLine(ctx);
-      drawDot(ctx);
-    }, 10);
+    await nextTick();
+    for (let i = 0; i < props.modelValue.length; i++) {
+      drawText(ctx, props.modelValue[i], i);
+    }
+    drawLine(ctx);
+    drawDot(ctx);
   };
 //刷新
 const replaceValue = () => {
@@ -171,9 +170,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-  .myCanvas{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.myCanvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
