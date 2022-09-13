@@ -159,9 +159,9 @@ const onSignIn = async (e) => {
     await form.value.validate();
     //发送登录请求
     // let { data } = await loginApi(formData.value)
-    存储token
+    //存储token
     Session.set("token", 123);
-    跳转主页
+    //跳转主页
     router.push({ name: "home" });
     isLoading.value = false;
   } catch (e) {
