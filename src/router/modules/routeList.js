@@ -1,4 +1,4 @@
-import { getMenus } from "@/api/login";
+import login from "@/api/login";
 
 class PermissionStore {
   #routerList;
@@ -7,7 +7,7 @@ class PermissionStore {
   }
   // 获取路由数据
   async geRouter() {
-    let { data } = await getMenus();
+    let { data } = await login.getMenus();
     this.#routerList = data;
   }
   // 添加路由
@@ -33,7 +33,6 @@ class PermissionStore {
     });
     return p;
   }
-
 }
 
 export default new PermissionStore();

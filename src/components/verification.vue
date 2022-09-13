@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watchEffect, watch } from "vue";
+import { onMounted } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 const props = defineProps({
