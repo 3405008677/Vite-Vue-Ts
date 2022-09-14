@@ -6,16 +6,14 @@
 
 <script setup>
 import { ref } from 'vue'
-import { user } from '@/store'
-
-let userStare = user()
+import { userStore } from '@/store'
 
 const props = defineProps({
   msg: String
 })
 const count = ref(0)
 
-console.log(userStare.counter, props.msg)
+console.log(userStore.counter, props.msg)
 </script>
 
 <style scoped>

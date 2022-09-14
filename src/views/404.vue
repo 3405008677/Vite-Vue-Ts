@@ -2,11 +2,12 @@
   <div class="wscn-http404-container">
     <div class="wscn-http404">
       <div class="pic-404">
-        <img class="pic-404__parent" src="@/assets/images/404.png" alt="404" />
-        <img class="pic-404__child left" src="@/assets/images/404_cloud.png" alt="404" />
-        <img class="pic-404__child mid" src="@/assets/images/404_cloud.png" alt="404" />
-        <img class="pic-404__child right" src="@/assets/images/404_cloud.png" alt="404" />
+        <img class="pic-404__parent" :src="img" alt="404" />
+        <img class="pic-404__child left" :src="cloud" alt="404" />
+        <img class="pic-404__child mid" :src="cloud" alt="404" />
+        <img class="pic-404__child right" :src="cloud" alt="404" />
       </div>
+
       <div class="bullshit">
         <div class="bullshit__oops">404!</div>
         <div class="bullshit__info">
@@ -15,7 +16,7 @@
         </div>
         <div class="bullshit__headline">{{ message }}</div>
         <div class="bullshit__info">Please check that the URL you entered is correct, or click the button below to return to the homepage.</div>
-        <router-link to="'/login'" class="bullshit__return-home">返回首页</router-link>
+        <router-link to="/" class="bullshit__return-home">返回首页</router-link>
       </div>
     </div>
   </div>
@@ -23,6 +24,8 @@
 
 <script setup>
 const message = 'The webmaster said that you can not enter this page...'
+const cloud = 'src/assets/404_image/404_cloud.png'
+const img = 'src/assets/404_image/404.png'
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { user } from '@/store'
 import { getToken } from './auth'
 import { ElNotification } from 'element-plus'
 

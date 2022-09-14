@@ -1,4 +1,5 @@
 import login from "@/api/login";
+import { userStore } from "@/store";
 
 class PermissionStore {
   #routerList;
@@ -9,6 +10,10 @@ class PermissionStore {
   async geRouter() {
     let { data } = await login.getMenus();
     this.#routerList = data;
+    userStore.setPermissionStore(data);
+    // 获取用户信息
+    data = await login.getUserInfo();
+    userStore.setUserInfo(data);
   }
   // 添加路由
   createRouter() {

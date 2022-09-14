@@ -4,6 +4,7 @@ import nProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { Session } from "@/utils/storage";
 import PermissionStore from "@/router/modules/routeList";
+import { userStore } from "@/store";
 
 nProgress.configure({ showSpinner: false });
 
@@ -14,7 +15,6 @@ const router = createRouter({
 
 // 加载动画
 let loading;
-
 /**
  * 添加动态路由
  * @param routes
@@ -37,16 +37,6 @@ const addRoute = (routes) => {
 };
 
 /**
- * 获取动态路由
- */
-const getRoute = async () => {
-  // 获取用户权限
-  // let {data} = await Api.getMenus()
-  // addRoute(data);
-  // PermissionStore.createRouter();
-};
-// getRoute()
-/**
  * 路由前置拦截
  */
 router.beforeEach((to, from, next) => {
@@ -58,7 +48,9 @@ router.beforeEach((to, from, next) => {
   const token = Session.get("token");
   if (token) {
     //获取权限路由
-    // PermissionStore.createRouter();
+    // if (userStore.permission_store.length == 0) {
+    //   PermissionStore.createRouter();
+    // }
     if (to.path === "/login") {
       ElNotification({
         title: "已经登录",
