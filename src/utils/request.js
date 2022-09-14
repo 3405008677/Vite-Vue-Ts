@@ -6,7 +6,7 @@ import { ElNotification } from 'element-plus'
 // axios实例
 const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 10000,
+  timeout: 5000,
   headers: {}
 })
 
