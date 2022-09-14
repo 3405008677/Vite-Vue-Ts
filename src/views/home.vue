@@ -2,6 +2,10 @@
   <div>Hello Word</div>
 </template>
 
-<script setup></script>
+<script>
+
+  console.log('123123')
+
+</script>
 
 <style scoped lang="scss"></style>

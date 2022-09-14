@@ -166,7 +166,6 @@ const onSignIn = async (e) => {
     isLoading.value = false;
   } catch (e) {
     isLoading.value = false;
-    console.log(e);
   }
 };
 </script>
