@@ -1,6 +1,8 @@
 import login from "@/api/login";
 import { userStore } from "@/store";
-
+import { lazyRoute } from "@/utils";
+// 开发环境不使用懒加载, 因为懒加载页面太多的话会造成热更新太慢, 所以只有生产环境使用懒加载
+let _import = lazyRoute(import.meta.env.PROD)
 class PermissionStore {
   #routerList;
   constructor() {
@@ -31,8 +33,10 @@ class PermissionStore {
       meta.title = item?.name;
       meta.isHide = item?.isHide;
       v.push = item.url;
+      v.name = item?.name;
       v.meta = meta;
       v.children = item.chiMenu;
+      v.component = _import(item.component);
       if (item.chiMenu) this.setRouter(item.chiMenu);
       p.push(v);
     });
