@@ -1,9 +1,63 @@
 // 通用样式
-@use './app.scss';
-@use './transition.scss';
-@use './base.scss';
-@use './common.scss';
-@use './loading.scss';
+@use "./app.scss";
+@use "./transition.scss";
+@use "./base.scss";
+@use "./common.scss";
+@use "./loading.scss";
 
 //自定义变量
-@use './variables.scss';
+@use "./variables.scss";
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, Arial, sans-serif;
+}
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.no-padding {
+  padding: 0px !important;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+div:focus {
+  outline: none;
+}
+.pointer {
+  cursor: pointer;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+.pl-5 {
+  padding-left: 5px;
+}
+.block {
+  display: block;
+}
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
