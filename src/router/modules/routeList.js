@@ -22,7 +22,6 @@ class PermissionStore {
     this.geRouter();
     this.#routerList = this.setRouter();
   }
-
   // 格式化路由
   setRouter() {
     const p = [],
