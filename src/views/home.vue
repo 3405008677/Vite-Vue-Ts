@@ -138,7 +138,6 @@ const routerList = [
     ],
   },
 ];
-
 const setRouter = () => {
   const p = [],
     v = {},

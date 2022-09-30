@@ -48,8 +48,11 @@ div:focus {
 .pl-5 {
   padding-left: 5px;
 }
-.block {
-  display: block;
+.pt-5 {
+  padding-left: 5px;
+}
+.pb-5 {
+  padding-left: 5px;
 }
 .clearfix {
   &:after {
@@ -60,4 +63,13 @@ div:focus {
     clear: both;
     height: 0;
   }
+}
+.f-j {
+  display: flex;
+  justify-content: center;
+}
+.f-j-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
