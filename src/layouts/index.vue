@@ -15,17 +15,22 @@
   </div>
 </template>
 <script setup>
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { Sidebar } from "./components";
 import { settingsStore, appStore } from "@/store";
 import { storeToRefs } from "pinia";
+import { useRouter ,useRoute} from "vue-router";
 
+const route = useRoute()
 const { showSettings, needTagsView, fixedHeader } = storeToRefs(settingsStore);
 const { sidebar, device } = storeToRefs(appStore);
+
+console.log(route.name);
+
+const handleClickOutside = () => {};
 </script>
 <style lang="scss" scoped>
 .app-wrapper {
-  @include clearfix;
   position: relative;
   height: 100%;
   width: 100%;
@@ -48,7 +53,6 @@ const { sidebar, device } = storeToRefs(appStore);
     top: 0;
     right: 0;
     z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
     transition: width 0.28s;
   }
   .hideSidebar .fixed-header {
