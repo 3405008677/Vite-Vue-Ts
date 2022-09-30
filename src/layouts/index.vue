@@ -1,25 +1,61 @@
 <template>
-  <div :class="classObj" class="app-wrapper"></div>
+  <div class="app-wrapper">
+    <div
+      v-if="device === 'mobile' && sidebar.opend"
+      class="drawer-bg"
+      @click="handleClickOutside"
+    />
+    <Sidebar class="sidebar-container" />
+    <div class="main-container">
+      <div :class="{ 'fixen-header': fixedHeader }">
+        <Navbar />
+        <Tags-View v-if="needdTagsView" />
+      </div>
+    </div>
+  </div>
 </template>
 <script setup>
 import { computed, ref } from "vue";
-import { myMapState, userStore } from "@/store";
-import { mapState } from "pinia";
+import { Sidebar } from "./components";
+import { settingsStore, appStore } from "@/store";
+import { storeToRefs } from "pinia";
 
-// const { sidebar, sidebarLogo } = myMapState(userStore, [
-//   "sidebar",
-//   "sidebarLogo",
-// ]);
-const { sidebar, sidebarLogo } = mapState(["sidebar", "sidebarLogo"]);
-
-console.log(sidebar, sidebarLogo);
+const { showSettings, needTagsView, fixedHeader } = storeToRefs(settingsStore);
+const { sidebar, device } = storeToRefs(appStore);
 </script>
-<style scoped lang="scss">
-.com-logo {
-  background-color: var(--el-menu-bg-color);
-  height: 60px;
-}
-.el-menu {
+<style lang="scss" scoped>
+.app-wrapper {
+  @include clearfix;
+  position: relative;
   height: 100%;
+  width: 100%;
+
+  &.mobile.openSidebar {
+    position: fixed;
+    top: 0;
+  }
+  .drawer-bg {
+    background: #000;
+    opacity: 0.3;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    z-index: 999;
+  }
+  .fixed-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: calc(100% - #{$sideBarWidth});
+    transition: width 0.28s;
+  }
+  .hideSidebar .fixed-header {
+    width: calc(100% - 54px);
+  }
+  .mobile .fixed-header {
+    width: 100%;
+  }
 }
 </style>

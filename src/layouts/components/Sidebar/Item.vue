@@ -10,7 +10,7 @@ import { ref } from "vue";
 const props = {
   icon: {
     type: String,
-    default: "",
+    default: (item) => [item, "sub-el-icon"],
   },
   title: {
     type: String,

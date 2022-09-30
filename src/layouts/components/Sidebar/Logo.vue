@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-logo-container" :class="{ collapse: collapse }" id="lofo">
+  <div class="sidebar-logo-container" :class="{ 'collapse': collapse }">
     <transtion name="sidebarLogoFade">
       <router-link
         v-if="collapse"
