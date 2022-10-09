@@ -3,8 +3,6 @@ import staticRouter from "./modules/static";
 import nProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { Session } from "@/utils/storage";
-import PermissionStore from "@/router/modules/routeList";
-import { userStore } from "@/store";
 
 nProgress.configure({ showSpinner: false });
 
@@ -44,6 +42,7 @@ router.beforeEach((to, from, next) => {
   loading = ElLoading.service({
     text: "拼命加载中...",
     background: "rgba(178,215,173,1)",
+    
   });
   const token = Session.get("token");
   if (token) {
@@ -103,4 +102,10 @@ router.afterEach((to, from) => {
   loading.close();
 });
 
+const resetRouter = () => {
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher;
+};
+
+export { resetRouter };
 export default router;
