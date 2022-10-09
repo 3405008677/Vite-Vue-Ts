@@ -1,7 +1,6 @@
-<template>
+<!-- <template>
   <section id="app">
     <Suspense>
-      <!--  -->
       <template #default>
         <router-view v-slot="{ Component, route }">
           <transition>
@@ -14,17 +13,15 @@
           </transition>
         </router-view>
       </template>
-      <!--  -->
       <template #fallback>Loading...</template>
-      <!--  -->
     </Suspense>
   </section>
-</template>
-<!-- <template>
+</template> -->
+<template>
   <div id="app">
     <router-view />
   </div>
-</template> -->
+</template>
 
 <script setup></script>
 

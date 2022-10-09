@@ -4,7 +4,7 @@ export default defineStore("app", {
   state: () => {
     return {
       sidebar: {
-        opened,
+        opened: false,
         withoutAnimation: false,
       },
       device: "desktop",

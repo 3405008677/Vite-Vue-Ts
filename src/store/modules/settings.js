@@ -15,8 +15,5 @@ export default defineStore("settings", {
       sidebarLogo,
     };
   },
-  actions: {
-    setUserInfo(value) {},
-    setPermissionStore(value) {},
-  },
+  actions: {},
 });

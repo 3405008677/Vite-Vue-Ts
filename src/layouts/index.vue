@@ -1,33 +1,41 @@
 <template>
-  <div class="app-wrapper">
+  <div :class="classObj" class="app-wrapper">
     <div
       v-if="device === 'mobile' && sidebar.opend"
       class="drawer-bg"
       @click="handleClickOutside"
     />
     <Sidebar class="sidebar-container" />
-    <div class="main-container">
+    <div :class="{ hasTagsView: tagsView }" class="main-container">
       <div :class="{ 'fixen-header': fixedHeader }">
         <Navbar />
         <Tags-View v-if="needdTagsView" />
       </div>
+      <app-main />
+      <right-panel v-if="showSettings">
+        <settings />
+      </right-panel>
     </div>
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
-import { Sidebar } from "./components";
-import { settingsStore, appStore } from "@/store";
+import { computed } from "vue";
+import RightPanel from "@/components/RightPanel/index.vue";
+import { AppMain, Navbar, Settings, Sidebar } from "./components";
+import { appStore, settingsStore } from "@/store";
 import { storeToRefs } from "pinia";
-import { useRouter ,useRoute} from "vue-router";
 
-const route = useRoute()
-const { showSettings, needTagsView, fixedHeader } = storeToRefs(settingsStore);
+const { showSettings, tagsView, fixedHeader } = storeToRefs(settingsStore);
 const { sidebar, device } = storeToRefs(appStore);
-
-console.log(route.name);
-
-const handleClickOutside = () => {};
+const classObj = computed(() => {
+  return {
+    hideSidebar: !sidebar.opened,
+    openSidebar: sidebar.opened,
+    withoutAnimation: sidebar.withoutAnimation,
+    mobile: device === "mobile",
+  };
+});
+const handleClickOutside = appStore.closeSideBar(false);
 </script>
 <style lang="scss" scoped>
 .app-wrapper {
