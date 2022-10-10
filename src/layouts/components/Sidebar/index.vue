@@ -27,10 +27,22 @@ import { computed } from "vue";
 import Logo from "./Logo.vue";
 import SidebarItem from "./SidebarItem";
 import variables from "@/styles/variables.scss";
-import { settingsStore } from "@/store";
+import { settingsStore, appStore, permissionStore } from "@/store";
+import { useRoute } from "vue-router";
 
+const permission_routes = computed(() => permissionStore.routes);
+const sidebar = computed(() => appStore.sidebar);
 
-
-
+const activeMenu = computed(() => {
+  const route = useRoute();
+  const { meta, path } = route;
+  if (meta.activeMenu) {
+    return meta.activeMenu;
+  }
+  return path;
+});
+const showLogo = computed(() => settingsStore.sidebarLogo);
+const variables = computed(() => variables);
+const isCollapse = computed(() => sidebar.opened);
 </script>
 <style scoped lang="scss"></style>
