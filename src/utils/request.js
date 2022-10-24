@@ -1,125 +1,125 @@
-import axios from 'axios'
-import { getToken } from './auth'
-import { ElNotification } from 'element-plus'
+import axios from "axios";
+import { getToken } from "./auth";
+import { ElNotification } from "element-plus";
 
 // axios实例
 const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_REL,
   timeout: 5000,
-  headers: {}
-})
+  headers: {},
+});
 // 请求拦截器
 request.interceptors.request.use(
   (config) => {
     // 请求前判断
-    const userToken = getToken()
-    if (userStore) {
-      config.headers['Authorization'] = `Bearer ${userToken}`
+    const userToken = getToken();
+    if (userToken) {
+      config.headers["Authorization"] = `Bearer ${userToken}`;
     }
-    return config
+    console.log(config);
+    return config;
   },
   (err) => {
-    return Promise.reject(err)
+    return Promise.reject(err);
   }
-)
+);
 
 // 响应拦截器
 request.interceptors.response.use(
-  response => {
-    const { data } = response
-    if (data.success) return data
-    data.errCode
+  (response) => {
+    const { data } = response;
+    console.log(response);
+    if (data.success) return data;
+    data.errCode;
   },
-  err => {
-    const { status } = error.response
+  (err) => {
+    const { status } = error.response;
     switch (status) {
       case 0:
         ElNotification({
           title: "0",
-          message: '无法连接服务器',
-          type: 'error',
-        })
+          message: "无法连接服务器",
+          type: "error",
+        });
         break;
       case 302:
         ElNotification({
           title: "302",
-          message: '登录过期',
-          type: 'error',
-        })
+          message: "登录过期",
+          type: "error",
+        });
         break;
       case 401:
         ElNotification({
           title: "401",
-          message: '未验证的用户',
-          type: 'error',
-        })
+          message: "未验证的用户",
+          type: "error",
+        });
         break;
       case 403:
         ElNotification({
           title: "403",
-          message: '资源拒绝访问',
-          type: 'error',
-        })
+          message: "资源拒绝访问",
+          type: "error",
+        });
         break;
       case 404:
         ElNotification({
           title: "404",
-          message: '服务资源不存在',
-          type: 'error',
-        })
+          message: "服务资源不存在",
+          type: "error",
+        });
         break;
       case 500:
         ElNotification({
           title: "500",
-          message: '服务运行错误',
-          type: 'error',
-        })
+          message: "服务运行错误",
+          type: "error",
+        });
         break;
       case 504:
         ElNotification({
           title: "504",
-          message: '代理访问错误',
-          type: 'error',
-        })
+          message: "代理访问错误",
+          type: "error",
+        });
         break;
     }
-    return Promise.reject()
+    return Promise.reject();
   }
-)
+);
 
 request.get = (url, params, headers = {}) => {
   return request({
     url,
     method: "GEt",
     params,
-    headers
-  })
-}
+    headers,
+  });
+};
 
 request.post = (url, data) => {
   return request({
     url,
     method: "POST",
-    data
-  })
-}
+    data,
+  });
+};
 
 request.put = (url, data) => {
   return request({
     url,
     method: "GEt",
-    data
-  })
-}
+    data,
+  });
+};
 
 request.delete = (url, params) => {
   return request({
     url,
     method: "DELETE",
-    params
-  })
-}
-
-
+    params,
+  });
+};
 
 export default request;

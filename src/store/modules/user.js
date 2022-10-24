@@ -27,6 +27,7 @@ export default defineStore("user", {
       return new Promise((resolve, reject) => {
         loginApi({ username: username.trim(), password: password.trim() })
           .then((response) => {
+            console.log(response)
             const { data } = response;
             this.token = data.token;
             setToken(data.token);

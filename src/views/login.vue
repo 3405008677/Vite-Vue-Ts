@@ -17,14 +17,14 @@
           :model="formData"
           :rules="rules"
         >
-          <el-form-item prop="user" class="login-animation1">
+          <el-form-item prop="username" class="login-animation1">
             <el-input
-              v-model="formData.user"
+              v-model="formData.username"
               type="text"
               placeholder="请输入账号"
               clearable
-              :readonly="readonlyInput.user"
-              @focus="readonlyInput.user = !readonlyInput.user"
+              :readonly="readonlyInput.username"
+              @focus="readonlyInput.username = !readonlyInput.username"
             >
               <template #prefix>
                 <el-icon class="el-input__icon">
@@ -96,7 +96,7 @@ const router = useRouter();
 const route = useRoute();
 // 校验规则
 const rules = {
-  user: [
+  username: [
     { required: true, message: "Please Enter User", trigger: "blur" },
     {
       min: 6,
@@ -129,9 +129,9 @@ const rules = {
 };
 // 用户信息
 const formData = ref({
-  user: import.meta.env.VITE_WEB_USER,
+  username: import.meta.env.VITE_WEB_USERNAME,
   password: import.meta.env.VITE_WEB_PASSWORD,
-  // user: "",
+  // username: "",
   // password: "",
   code: "",
 });
@@ -139,7 +139,7 @@ const form = ref(null),
   isLoading = ref(false),
   // 设置form不自动补全
   readonlyInput = ref({
-    user: true,
+    username: true,
     password: true,
   }),
   // 绑定验证码的值
@@ -157,7 +157,7 @@ const onSignIn = async (e) => {
   try {
     await form.value.validate();
     //发送登录请求
-    await userStore.login(formData);
+    await userStore.login(formData.value);
     //存储token
     Session.set("token", 123);
     //跳转主页
