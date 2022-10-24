@@ -1,111 +1,39 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import staticRouter from "./modules/static";
-import nProgress from "nprogress";
+import { guard } from "./guard";
 import "nprogress/nprogress.css";
-import { Session } from "@/utils/storage";
 
-nProgress.configure({ showSpinner: false });
+// 白名单
+const WHITE_NAME_LIST = [];
+const getRouteNames = (array = []) => {
+  array.forEach((item) => {
+    WHITE_NAME_LIST.push(item.name);
+    getRouteNames(item.children || []);
+  });
+};
+getRouteNames(staticRouter);
 
+// app router
 const router = createRouter({
   history: createWebHashHistory(),
   routes: staticRouter,
+  // 是否应该禁止尾部斜杠。默认为假
+  strict: true,
+  // 滚动行为
+  scrollBehavior: () => ({ left: 0, top: 0 }),
 });
-
-// 加载动画
-let loading;
 /**
- * 添加动态路由
- * @param routes
+ * 清空路由
+ * 并且保存白名单里面的路由
  */
-const addRoute = (routes) => {
-  routes.forEach((item) => {
-    const routeName = item.name;
-    // 判断路由是否存在
-    if (!router.hasRoute(routeName)) router.addRoute(item);
-    if (item.children) {
-      const childrenRouters = item.children.map((subRoute) => {
-        return {
-          ...subRoute,
-          path: [item.path, "/", subRoute.path].join(""),
-        };
-      });
-      addRoute(childrenRouters);
+export const resetRouter = () => {
+  router.getRoutes().forEach((route) => {
+    const { name } = route;
+    if (name && !WHITE_NAME_LIST.includes(name)) {
+      router.hasRoute(name) && router.removeRoute(name);
     }
   });
 };
 
-/**
- * 路由前置拦截
- */
-router.beforeEach((to, from, next) => {
-  nProgress.start();
-  loading = ElLoading.service({
-    text: "拼命加载中...",
-    background: "rgba(178,215,173,1)",
-    
-  });
-  const token = Session.get("token");
-  if (token) {
-    //获取权限路由
-    // if (userStore.permission_store.length == 0) {
-    //   PermissionStore.createRouter();
-    // }
-    if (to.path === "/login") {
-      ElNotification({
-        title: "已经登录",
-        message: "请先退出再登录！",
-        type: "error",
-      });
-      return next(from.path);
-    }
-    // 判断路由是否存在
-    if (!router.hasRoute(to.name)) {
-      ElNotification({
-        title: "路由不存在",
-        message: "别瞎点了！",
-        type: "error",
-      });
-      return next(from.path);
-    }
-    return next();
-  } else {
-    // 判断路由是否存在
-    if (!router.hasRoute(to.name)) {
-      ElNotification({
-        title: "路由不存在",
-        message: "别瞎点了，老实登录去吧！",
-        type: "error",
-      });
-      Session.clear();
-      return next("login");
-    }
-    if (to.meta && to.meta.needLogin === false) {
-      Session.clear();
-      return next();
-    } else {
-      ElNotification({
-        title: "token过期",
-        message: "请重新登录",
-        type: "error",
-      });
-      Session.clear();
-      return next("login");
-    }
-  }
-});
-
-/**
- * 路由后置拦截
- */
-router.afterEach((to, from) => {
-  nProgress.done();
-  loading.close();
-});
-
-const resetRouter = () => {
-  const newRouter = createRouter();
-  router.matcher = newRouter.matcher;
-};
-
-export { resetRouter };
+guard(router);
 export default router;

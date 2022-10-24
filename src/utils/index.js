@@ -1,11 +1,4 @@
 import { isObject } from "lodash";
-
-const lazyRoute = (confirm) =>
-  confirm
-    ? (file) => () => import("@/views/" + file + ".vue")
-    : (file) => require("@/views/" + file + ".vue").default;
-export { lazyRoute };
-
 /**
  * Created by PanJiaChen on 16/11/18.
  */
@@ -91,15 +84,7 @@ export function formatTime(time, option) {
     return parseTime(time, option);
   } else {
     return (
-      d.getMonth() +
-      1 +
-      "月" +
-      d.getDate() +
-      "日" +
-      d.getHours() +
-      "时" +
-      d.getMinutes() +
-      "分"
+      d.getMonth() + 1 + "月" + d.getDate() + "日" + d.getHours() + "时" + d.getMinutes() + "分"
     );
   }
 }
@@ -237,8 +222,7 @@ export function toggleClass(element, className) {
     classString += "" + className;
   } else {
     classString =
-      classString.substr(0, nameIndex) +
-      classString.substr(nameIndex + className.length);
+      classString.substr(0, nameIndex) + classString.substr(nameIndex + className.length);
   }
   element.className = classString;
 }

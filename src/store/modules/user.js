@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { getToken, setToken, removeToken } from "@/utils/auth";
 import { resetRouter } from "@/router";
-import { login, getInfo, logout  } from "@/api/user"
+import { loginApi, getInfoApi, logoutApi } from "@/api/user";
 
 export default defineStore("user", {
   state: () => {
@@ -11,6 +11,7 @@ export default defineStore("user", {
       avatar: "",
       introduction: "",
       roles: [],
+      routerList: [],
     };
   },
   actions: {
@@ -24,11 +25,13 @@ export default defineStore("user", {
     login(userinfo) {
       const { username, password } = userinfo;
       return new Promise((resolve, reject) => {
-        login({ username: username.trim(), password: password.trim() })
+        loginApi({ username: username.trim(), password: password.trim() })
           .then((response) => {
             const { data } = response;
             this.token = data.token;
             setToken(data.token);
+            // 获取用户信息
+            // this.setInfo()
             resolve();
           })
           .catch((error) => {
@@ -39,13 +42,12 @@ export default defineStore("user", {
     // 获取用户信息
     setInfo() {
       return new Promise((resolve, reject) => {
-        getInfo(this.token)
+        getInfoApi(this.token)
           .then((response) => {
             const { data } = response;
             if (!data) reject(response.msg);
             const { roles, name, avatar, introduction } = data;
-            if (!roles || roles.length <= 0)
-              reject("getInfo: roles must be a non-null array!");
+            if (!roles || roles.length <= 0) reject("getInfo: roles must be a non-null array!");
             this.roles = roles;
             this.name = name;
             this.avatar = avatar;
@@ -60,7 +62,7 @@ export default defineStore("user", {
     //退出登录
     logout() {
       return new Promise((resolve, reject) => {
-        logout(this.token)
+        logoutApi(this.token)
           .then(() => {
             this.token = "";
             this.roles = [];

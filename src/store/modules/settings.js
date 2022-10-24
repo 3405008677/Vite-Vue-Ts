@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import variables from "@/style/element-variables.scss";
-console.log(variables.theme);
 import defaultSettings from "@/settings";
 
 const { showSettings, tagsView, fixedHeader, sidebarLogo } = defaultSettings;

@@ -13,6 +13,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 // 挂载全局
-// app.config.globalProperties.$store =
+// app.config.globalProperties.$daMy = 'asdasd';
+// app.config.globalProperties.msg = 'hello'
 
 app.use(pinia).use(router).use(ElementPlus).mount("#app");

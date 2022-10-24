@@ -4,12 +4,10 @@ import { ElNotification } from 'element-plus'
 
 // axios实例
 const request = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_REL,
   timeout: 5000,
   headers: {}
 })
-
-
 // 请求拦截器
 request.interceptors.request.use(
   (config) => {

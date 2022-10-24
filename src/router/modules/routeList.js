@@ -1,26 +1,22 @@
-import login from "@/api/login";
+import { getMenusApi } from "@/api/user";
 import { userStore } from "@/store";
-import { lazyRoute } from "@/utils";
 // 开发环境不使用懒加载, 因为懒加载页面太多的话会造成热更新太慢, 所以只有生产环境使用懒加载
-let _import = lazyRoute(import.meta.env.PROD)
 class PermissionStore {
   #routerList;
   constructor() {
     this.#routerList = [];
   }
   // 获取路由数据
-  async geRouter() {
-    let { data } = await login.getMenus();
+  async getRouter() {
+    let { data } = await getMenusApi();
     this.#routerList = data;
     userStore.setPermissionStore(data);
-    // 获取用户信息
-    data = await login.getUserInfo();
-    userStore.setUserInfo(data);
   }
   // 添加路由
   createRouter() {
-    this.geRouter();
+    this.getRouter();
     this.#routerList = this.setRouter();
+    return this.#routerList;
   }
   // 格式化路由
   setRouter() {
@@ -35,7 +31,7 @@ class PermissionStore {
       v.name = item?.name;
       v.meta = meta;
       v.children = item.chiMenu;
-      v.component = _import(item.component);
+      v.component = () => import(/* @vite-ignore */"@/views/" + item.component + ".vue");
       if (item.chiMenu) this.setRouter(item.chiMenu);
       p.push(v);
     });

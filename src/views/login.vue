@@ -17,14 +17,14 @@
           :model="formData"
           :rules="rules"
         >
-          <el-form-item prop="username" class="login-animation1">
+          <el-form-item prop="user" class="login-animation1">
             <el-input
-              v-model="formData.username"
+              v-model="formData.user"
               type="text"
               placeholder="请输入账号"
               clearable
-              :readonly="readonlyInput.username"
-              @focus="readonlyInput.username = !readonlyInput.username"
+              :readonly="readonlyInput.user"
+              @focus="readonlyInput.user = !readonlyInput.user"
             >
               <template #prefix>
                 <el-icon class="el-input__icon">
@@ -89,14 +89,14 @@
 <script setup>
 import { ref } from "vue";
 import { Session } from "@/utils/storage";
-import { useRouter ,useRoute} from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import VerificationVue from "@/components/verification.vue";
-
+import { userStore } from "@/store";
 const router = useRouter();
-const route = useRoute()
+const route = useRoute();
 // 校验规则
 const rules = {
-  username: [
+  user: [
     { required: true, message: "Please Enter User", trigger: "blur" },
     {
       min: 6,
@@ -129,28 +129,27 @@ const rules = {
 };
 // 用户信息
 const formData = ref({
-  // username: import.meta.env.VITE_WEB_ADMIN,
-  // passwd: import.meta.env.VITE_WEB_PADD,
-  username: "",
-  password: "",
+  user: import.meta.env.VITE_WEB_USER,
+  password: import.meta.env.VITE_WEB_PASSWORD,
+  // user: "",
+  // password: "",
   code: "",
 });
 const form = ref(null),
   isLoading = ref(false),
   // 设置form不自动补全
   readonlyInput = ref({
-    username: true,
+    user: true,
     password: true,
   }),
   // 绑定验证码的值
   identifyCode = ref("");
 
 // 登录成功后
-const signSuccess = ()=>{
+const signSuccess = () => {
   // 登录成功跳转首页
-  console.log(route.query?.redirect,'route')
-
-}
+  console.log(route.query?.redirect, "route");
+};
 
 // 登录按钮
 const onSignIn = async (e) => {
@@ -158,7 +157,7 @@ const onSignIn = async (e) => {
   try {
     await form.value.validate();
     //发送登录请求
-    // let { data } = await loginApi(formData.value)
+    await userStore.login(formData);
     //存储token
     Session.set("token", 123);
     //跳转主页
