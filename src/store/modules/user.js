@@ -27,10 +27,10 @@ export default defineStore("user", {
       return new Promise((resolve, reject) => {
         loginApi({ username: username.trim(), password: password.trim() })
           .then((response) => {
-            console.log(response)
-            const { data } = response;
-            this.token = data.token;
-            setToken(data.token);
+            const { bean } = response;
+            console.log(bean.token)
+            this.token = bean.token;
+            setToken(bean.token);
             // 获取用户信息
             // this.setInfo()
             resolve();

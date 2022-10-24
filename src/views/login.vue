@@ -99,7 +99,7 @@ const rules = {
   username: [
     { required: true, message: "Please Enter User", trigger: "blur" },
     {
-      min: 6,
+      min: 4,
       max: 16,
       message: "User Length Should be 6 to 16",
       trigger: "blur",

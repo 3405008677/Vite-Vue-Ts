@@ -9,6 +9,7 @@ import { resolve } from "path";
 import viteCompression from "vite-plugin-compression";
 // 可视化
 import { visualizer } from "rollup-plugin-visualizer";
+import { createProxy } from "./build/vite/proxy";
 
 // 定义resolve
 const pathResolve = (dir) => {
@@ -43,7 +44,7 @@ const viteConfig = defineConfig(({ mode }) => {
     server: {
       host: true,
       port: env.VITE_PORT,
-      proxy,
+      proxy: createProxy(env.VITE_PROXY),
       strictPort: false, //若端口占用，尝试下一个
     },
     // 打包配置
@@ -54,22 +55,6 @@ const viteConfig = defineConfig(({ mode }) => {
       sourcemap: false,
     },
   };
-});
-
-// 设置代理
-const proxy = () => ({
-  [env.VITE_PROXY_API]: {
-    target: env.VITE_PROXY,
-    changeOrigin: true,
-    rewrite: (path) => path.replace(/^\/api/, ""),
-    headers: {
-      Referer: env.VITE_PROXY,
-    },
-    // 是否开启安全证书校验（https时关闭）
-    secure: false,
-    // 如果希望同时代理WebSocket接口,设置为true
-    ws: false,
-  },
 });
 
 export default viteConfig;

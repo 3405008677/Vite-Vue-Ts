@@ -16,24 +16,26 @@ request.interceptors.request.use(
     if (userToken) {
       config.headers["Authorization"] = `Bearer ${userToken}`;
     }
-    console.log(config);
     return config;
   },
   (err) => {
     return Promise.reject(err);
   }
 );
-
 // 响应拦截器
 request.interceptors.response.use(
   (response) => {
     const { data } = response;
-    console.log(response);
-    if (data.success) return data;
-    data.errCode;
+    if (data.code === 200) return data;
+    ElNotification({
+      title: "错误",
+      message: data.msg,
+      type: "error",
+    });
   },
   (err) => {
-    const { status } = error.response;
+    console.log(err,'err');
+    const { status } = err.response;
     switch (status) {
       case 0:
         ElNotification({
