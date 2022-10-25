@@ -34,9 +34,7 @@ request.interceptors.response.use(
     });
   },
   (err) => {
-    console.log(err,'err');
-    const { status } = err.response;
-    switch (status) {
+    switch (err.code) {
       case 0:
         ElNotification({
           title: "0",
@@ -86,6 +84,12 @@ request.interceptors.response.use(
           type: "error",
         });
         break;
+      default:
+        ElNotification({
+          title: "错误",
+          message: err.mseeage,
+          type: "error",
+        });
     }
     return Promise.reject();
   }

@@ -1,5 +1,5 @@
 import { Session } from "@/utils/storage";
-import { addRoute } from "../utils/index";
+import { addRoute, changeURL } from "../utils/index";
 import nProgress from "nprogress";
 // 进度条
 nProgress.configure({ showSpinner: false });
@@ -18,9 +18,9 @@ export function beforeEach(router) {
     const token = Session.get("token");
     if (token) {
       //获取权限路由
-    //   if (userStore.routerList.length == 0) {
-    //     PermissionStore.createRouter();
-    //   }
+      //   if (userStore.routerList.length == 0) {
+      //     PermissionStore.createRouter();
+      //   }
       if (to.path === "/login") {
         ElNotification({
           title: "已经登录",
@@ -47,11 +47,12 @@ export function beforeEach(router) {
           message: "别瞎点了，老实登录去吧！",
           type: "error",
         });
-        Session.clear();
         return next("login");
       }
-      if (to.meta && to.meta.needLogin === false) {
-        Session.clear();
+      console.log(from);
+      console.log(to);
+      //如果当前路由需要不登录
+      if (to.meta.needLogin === false) {
         return next();
       } else {
         ElNotification({
@@ -59,8 +60,10 @@ export function beforeEach(router) {
           message: "请重新登录",
           type: "error",
         });
-        Session.clear();
-        return next("login");
+        return next({
+          path: "/login",
+          query: { redirect: to.fullPath },
+        });
       }
     }
   });

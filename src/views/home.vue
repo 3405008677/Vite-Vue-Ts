@@ -6,7 +6,7 @@
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
-console.log(router.options.routes);
+console.log(router.options.routes[0].children);
 
 
 

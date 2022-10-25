@@ -1,6 +1,6 @@
 export const sysRoute = {
-  path: "/system",
-  name: "System",
+  path: "/one",
+  name: "one",
   component: "LAYOUT",
   redirect: "/system/account",
   meta: {

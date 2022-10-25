@@ -57,6 +57,7 @@
                 placeholder="验证码"
                 clearable
                 autocomplete="off"
+                @keyup.enter="onSignIn()"
               >
                 <template #prefix>
                   <el-icon class="el-input__icon">
@@ -88,7 +89,6 @@
 
 <script setup>
 import { ref } from "vue";
-import { Session } from "@/utils/storage";
 import { useRouter, useRoute } from "vue-router";
 import VerificationVue from "@/components/verification.vue";
 import { userStore } from "@/store";
@@ -131,8 +131,6 @@ const rules = {
 const formData = ref({
   username: import.meta.env.VITE_WEB_USERNAME,
   password: import.meta.env.VITE_WEB_PASSWORD,
-  // username: "",
-  // password: "",
   code: "",
 });
 const form = ref(null),
@@ -145,12 +143,6 @@ const form = ref(null),
   // 绑定验证码的值
   identifyCode = ref("");
 
-// 登录成功后
-const signSuccess = () => {
-  // 登录成功跳转首页
-  console.log(route.query?.redirect, "route");
-};
-
 // 登录按钮
 const onSignIn = async (e) => {
   isLoading.value = true;
@@ -158,14 +150,16 @@ const onSignIn = async (e) => {
     await form.value.validate();
     //发送登录请求
     await userStore.login(formData.value);
-    //存储token
-    Session.set("token", 123);
-    //跳转主页
-    router.push({ name: "home" });
+    signSuccess();
     isLoading.value = false;
   } catch (e) {
     isLoading.value = false;
   }
+};
+// 登录成功后
+const signSuccess = () => {
+  // 登录成功跳转首页
+  router.replace(route.query.redirect);
 };
 </script>
 

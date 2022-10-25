@@ -28,7 +28,6 @@ export default defineStore("user", {
         loginApi({ username: username.trim(), password: password.trim() })
           .then((response) => {
             const { bean } = response;
-            console.log(bean.token)
             this.token = bean.token;
             setToken(bean.token);
             // 获取用户信息
