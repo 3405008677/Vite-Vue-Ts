@@ -9,6 +9,7 @@ export default defineStore("app", {
       },
       device: "desktop",
       size: Session.get("size") || "medium",
+      showSidebar: true,
     };
   },
   actions: {
@@ -31,6 +32,9 @@ export default defineStore("app", {
     },
     setSize(value) {
       Session.set("size", value);
+    },
+    setShowSidebar(value) {
+      this.showSidebar = value;
     },
   },
 });

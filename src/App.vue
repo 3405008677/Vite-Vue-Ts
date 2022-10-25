@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <Layouts />
 </template>
-<script setup></script>
+<script setup>
+import Layouts from "@/layouts/index.vue";
+</script>
 <style lang="scss" scoped></style>
