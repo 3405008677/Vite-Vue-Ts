@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
-import { getToken, setToken, removeToken } from "@/utils/auth";
+import { getToken, setToken, removeToken, setRouterList, getRouterList } from "@/utils/auth";
 import { resetRouter } from "@/router";
-import { loginApi, getInfoApi, logoutApi } from "@/api/user";
+import { addRouteList } from "@/router";
+import { routerList as myRouterList } from "/mock/router";
+import { loginApi, getMenuListApi, getUserInfoListApi, logoutApi } from "@/api/user";
 
 export default defineStore("user", {
   state: () => {
@@ -11,17 +13,11 @@ export default defineStore("user", {
       avatar: "",
       introduction: "",
       roles: [],
-      routerList: [],
+      routerList: getRouterList(),
     };
   },
   actions: {
-    setUserInfo(value) {
-      this.userInfo = value;
-    },
-    setPermissionStore(value) {
-      this.permissionStore = value;
-    },
-    // 用户登录
+    // 管理员登录
     login(userinfo) {
       const { username, password } = userinfo;
       return new Promise((resolve, reject) => {
@@ -31,7 +27,8 @@ export default defineStore("user", {
             this.token = bean.token;
             setToken(bean.token);
             // 获取用户信息
-            // this.setInfo()
+            // this.getInfo()
+            this.getRouterList();
             resolve();
           })
           .catch((error) => {
@@ -40,9 +37,9 @@ export default defineStore("user", {
       });
     },
     // 获取用户信息
-    setInfo() {
+    getInfo() {
       return new Promise((resolve, reject) => {
-        getInfoApi(this.token)
+        getUserInfoListApi(this.token)
           .then((response) => {
             const { data } = response;
             if (!data) reject(response.msg);
@@ -58,6 +55,17 @@ export default defineStore("user", {
             reject(error);
           });
       });
+    },
+    // 获取管理员路由
+    async getRouterList() {
+      // let { bean } = await getMenuListApi();
+      // this.routerList = bean;
+      // 动态添加权限
+      addRouteList(myRouterList);
+      // 设置本地router-list
+      setRouterList(myRouterList);
+      // 更新到pinia
+      this.routerList = myRouterList;
     },
     //退出登录
     logout() {
@@ -83,4 +91,5 @@ export default defineStore("user", {
       });
     },
   },
+  getters: {},
 });

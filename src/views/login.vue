@@ -149,7 +149,9 @@ const onSignIn = async (e) => {
   try {
     await form.value.validate();
     //发送登录请求
-    await userStore.login(formData.value);
+    // await userStore.login(formData.value);
+    userStore.getRouterList();
+    window.sessionStorage.setItem("token", "123");
     signSuccess();
     isLoading.value = false;
   } catch (e) {
@@ -160,6 +162,7 @@ const onSignIn = async (e) => {
 const signSuccess = () => {
   // 登录成功跳转首页
   router.replace(route.query.redirect);
+  console.log(router.options.routes);
 };
 </script>
 

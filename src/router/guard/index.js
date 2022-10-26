@@ -1,5 +1,5 @@
-import { Session } from "@/utils/storage";
-import { addRoute, changeURL } from "../utils/index";
+import { getRouterList, getToken } from "@/utils/auth";
+import { userStore } from "@/store";
 import nProgress from "nprogress";
 // 进度条
 nProgress.configure({ showSpinner: false });
@@ -15,12 +15,8 @@ export function beforeEach(router) {
       text: "拼命加载中...",
       background: "rgba(178,215,173,1)",
     });
-    const token = Session.get("token");
+    const token = getToken();
     if (token) {
-      //获取权限路由
-      //   if (userStore.routerList.length == 0) {
-      //     PermissionStore.createRouter();
-      //   }
       if (to.path === "/login") {
         ElNotification({
           title: "已经登录",
@@ -31,6 +27,11 @@ export function beforeEach(router) {
       }
       // 判断路由是否存在
       if (!router.hasRoute(to.name)) {
+        // 判断本地是否有路由，如果有路由则是因为刷新导致路由丢失，重新渲染
+        if (getRouterList()) {
+          userStore.getRouterList();
+          return next();
+        }
         ElNotification({
           title: "路由不存在",
           message: "别瞎点了！",
@@ -49,8 +50,6 @@ export function beforeEach(router) {
         });
         return next("login");
       }
-      console.log(from);
-      console.log(to);
       //如果当前路由需要不登录
       if (to.meta.needLogin === false) {
         return next();

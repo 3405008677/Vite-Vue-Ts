@@ -1,3 +1,7 @@
-<template><div>content</div></template>
-<script setup></script>
+<template>
+  <PageLayout />
+</template>
+<script setup>
+import PageLayout from "@/layouts/page/index.vue";
+</script>
 <style scoped lang="scss"></style>

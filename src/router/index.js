@@ -23,6 +23,22 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 /**
+ * 添加动态路由
+ * @param routeList
+ */
+export const addRouteList = (routerList, father = "/") => {
+  routerList.forEach((item) => {
+    let routeName = item.name;
+    // 判断路由是否存在
+    if (!router.hasRoute(routeName)) {
+      router.addRoute(father, item);
+    }
+    if (item.children) {
+      addRouteList(item.children, item.path);
+    }
+  });
+};
+/**
  * 清空路由
  * 并且保存白名单里面的路由
  */

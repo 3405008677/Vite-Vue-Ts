@@ -20,9 +20,19 @@ const getToken = () => {
   return Session.get("token");
 };
 
+// 存储管理员路由
+const setRouterList = (value) => {
+  return Session.set("ROUTER-LIST", value);
+};
+
+// 获取管理员路由
+const getRouterList = () => {
+  return Session.get("ROUTER-LIST");
+};
+
 // 退出登录
 const removeToken = () => {
   return Session.remove("token");
 };
 
-export { setUserInfo, getUserInfo, setToken, getToken, removeToken };
+export { setUserInfo, getUserInfo, setToken, getToken, removeToken, setRouterList, getRouterList };

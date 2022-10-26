@@ -3,17 +3,17 @@ import request from "@/utils/request";
 const loginApi = (params) => {
   return request.post("/sys/login", params);
 };
-// 获取路由
-const getMenusApi = () => {
-  return request.get("/getRouter");
+// 获取管理员路由
+const getMenuListApi = () => {
+  return request.get("/sys/menu/list");
 };
 // 获取用户信息
-const getInfoApi = (token) => {
-  return request.get("/userInfo", token);
+const getUserInfoListApi = (token) => {
+  return request.get("/sys/user/infoList", token);
 };
 //退出
 const logoutApi = () => {
   return request.post("/logout");
 };
 
-export { loginApi, getMenusApi, getInfoApi, logoutApi };
+export { loginApi, getMenuListApi, getUserInfoListApi, logoutApi };

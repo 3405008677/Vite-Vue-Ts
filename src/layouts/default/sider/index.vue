@@ -1,16 +1,14 @@
 <template>
-  <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo"
-    :collapse="isCollapse"
-    @open="handleOpen"
-    @close="handleClose"
-  >
-    <template v-for="item in menuList" :key="item.path">
+  <el-menu default-active="/home" class="el-menu-vertical-demo" :collapse="isCollapse" router>
+    <template v-for="item in userStore.routerList" :key="item.name">
       <SiderMenu :data="item" v-if="item.children" />
-      <el-menu-item v-else :index="item.path" router>
-        <!-- <el-icon></el-icon> -->
-        <template #title>{{ item.meta.title }}</template>
+      <el-menu-item v-else :index="item.name" router>
+        <el-icon>
+          <component :is="item.meta.elIcon" />
+        </el-icon>
+        <template #title>
+          <span>{{ item.meta.title }}</span>
+        </template>
       </el-menu-item>
     </template>
   </el-menu>
@@ -18,15 +16,14 @@
 <script setup>
 import { ref } from "vue";
 import SiderMenu from "./siderMenu.vue";
-import { useRoute, useRouter } from "vue-router";
-const router = useRouter();
-const menuList = ref(router.options.routes[0].children);
+import { userStore } from "@/store";
+import { useRouter } from "vue-router";
 const isCollapse = ref(false);
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath);
-};
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath);
-};
+const router = useRouter();
+console.log(router.options.routes,'now-router');
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped>
+:deep(.el-menu-item-group__title) {
+  padding: 0;
+}
+</style>
