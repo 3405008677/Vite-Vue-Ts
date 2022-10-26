@@ -1,23 +1,35 @@
-import Layout from "@/layouts/default/index.vue";
 export default [
   {
     path: "/",
-    redirect: "home",
-    component: Layout,
+    name: "/",
+  
+    component: () => import("@/layouts/default/index.vue"),
     children: [
       {
-        path: "home",
-        name: "home",
+        path: "/home",
+        name: "/home",
         component: () => import("@/views/home.vue"),
         meta: {
           title: "首页",
+          elIcon: "House",
+          isHide: true,
+          keepAlive: false,
+        },
+      },
+      {
+        path: "/house",
+        name: "/house",
+        component: () => import("@/views/home.vue"),
+        meta: {
+          title: "house",
+          elIcon: "Clock",
           isHide: true,
           keepAlive: false,
         },
         children: [
           {
-            path: "h-one",
-            name: "h-one",
+            path: "/h-one",
+            name: "/house/h-one",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "h-one",
@@ -26,8 +38,8 @@ export default [
             },
           },
           {
-            path: "h-two",
-            name: "h-two",
+            path: "/h-two",
+            name: "/house/h-two",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "h-two",
@@ -36,8 +48,8 @@ export default [
             },
           },
           {
-            path: "h-three",
-            name: "h-three",
+            path: "/h-three",
+            name: "/house/h-three",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "h-three",
@@ -48,18 +60,19 @@ export default [
         ],
       },
       {
-        path: "cat",
-        name: "cat",
+        path: "/cat",
+        name: "/cat",
         component: () => import("@/views/home.vue"),
         meta: {
           title: "cat",
+          elIcon: "Filter",
           isHide: true,
           keepAlive: false,
         },
         children: [
           {
-            path: "c-one",
-            name: "c-one",
+            path: "/c-one",
+            name: "/cat/c-one",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "c-one",
@@ -68,8 +81,8 @@ export default [
             },
           },
           {
-            path: "c-two",
-            name: "c-two",
+            path: "/c-two",
+            name: "/cat/c-two",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "c-two",
@@ -78,8 +91,8 @@ export default [
             },
           },
           {
-            path: "c-three",
-            name: "c-three",
+            path: "/c-three",
+            name: "/cat/c-three",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "c-three",
@@ -90,18 +103,19 @@ export default [
         ],
       },
       {
-        path: "phone",
-        name: "phone",
+        path: "/phone",
+        name: "/phone",
         component: () => import("@/views/home.vue"),
         meta: {
           title: "phone",
+          elIcon: "Edit",
           isHide: true,
           keepAlive: false,
         },
         children: [
           {
-            path: "p-one",
-            name: "p-one",
+            path: "/p-one",
+            name: "/phone/p-one",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "p-one",
@@ -110,8 +124,8 @@ export default [
             },
           },
           {
-            path: "p-two",
-            name: "p-two",
+            path: "/p-two",
+            name: "/phone/p-two",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "p-two",
@@ -120,14 +134,36 @@ export default [
             },
           },
           {
-            path: "p-three",
-            name: "p-three",
+            path: "/p-three",
+            name: "/phone/p-three",
             component: () => import("@/views/home.vue"),
             meta: {
               title: "p-three",
               isHide: true,
               keepAlive: false,
             },
+            children: [
+              {
+                path: "/p-three-one",
+                name: "/phone/p-three/p-three-one",
+                component: () => import("@/views/home.vue"),
+                meta: {
+                  title: "p-two",
+                  isHide: true,
+                  keepAlive: false,
+                },
+              },
+              {
+                path: "/p-three-tow",
+                name: "/phone/p-three/p-three-tow",
+                component: () => import("@/views/home.vue"),
+                meta: {
+                  title: "p-two",
+                  isHide: true,
+                  keepAlive: false,
+                },
+              },
+            ],
           },
         ],
       },
