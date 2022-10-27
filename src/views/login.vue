@@ -161,8 +161,11 @@ const onSignIn = async (e) => {
 // 登录成功后
 const signSuccess = () => {
   // 登录成功跳转首页
-  router.replace(route.query.redirect);
-  console.log(router.options.routes);
+  if (route.query.redirect) {
+    router.replace(route.query.redirect);
+  } else {
+    router.replace("/home");
+  }
 };
 </script>
 

@@ -13,7 +13,7 @@ export const routerList = [
   {
     path: "/house",
     name: "/house",
-    component: () => import("@/views/home.vue"),
+    redirect: "/home",
     meta: {
       title: "house",
       elIcon: "Clock",
@@ -56,7 +56,7 @@ export const routerList = [
   {
     path: "/cat",
     name: "/cat",
-    component: () => import("@/views/home.vue"),
+    redirect: "/home",
     meta: {
       title: "cat",
       elIcon: "Filter",
@@ -99,7 +99,7 @@ export const routerList = [
   {
     path: "/phone",
     name: "/phone",
-    component: () => import("@/views/home.vue"),
+    redirect: "/home",
     meta: {
       title: "phone",
       elIcon: "Edit",

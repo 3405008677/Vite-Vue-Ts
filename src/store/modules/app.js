@@ -9,7 +9,12 @@ export default defineStore("app", {
       },
       device: "desktop",
       size: Session.get("size") || "medium",
+      // 显示LOGO
+      isLogo: true,
+      // 是否显示左边栏
       showSidebar: true,
+      // 缩小左边栏
+      isCollapse: false,
     };
   },
   actions: {
@@ -35,6 +40,10 @@ export default defineStore("app", {
     },
     setShowSidebar(value) {
       this.showSidebar = value;
+    },
+    //缩小 or 还原 sidebar
+    toggleCollapsed() {
+      this.isCollapse = !this.isCollapse;
     },
   },
 });

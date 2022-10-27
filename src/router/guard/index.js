@@ -30,7 +30,8 @@ export function beforeEach(router) {
         // 判断本地是否有路由，如果有路由则是因为刷新导致路由丢失，重新渲染
         if (getRouterList()) {
           userStore.getRouterList();
-          return next();
+          // return next({ path: to.path, replace: true });
+          return next({ path: to.fullPath, replace: true, query: to.query });
         }
         ElNotification({
           title: "路由不存在",

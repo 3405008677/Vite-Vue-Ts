@@ -66,9 +66,13 @@ div:focus {
   display: flex;
   justify-content: center;
 }
-.flex-j-c {
+.flex-j-a {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.flex-a {
+  display: flex;
   align-items: center;
 }
 .flex-auto {
@@ -110,28 +114,28 @@ div:focus {
   padding: 20px;
 }
 .pl-5 {
-  padding: 5px;
+  padding-left: 5px;
 }
 .pr-5 {
-  padding: 5px;
+  padding-right: 5px;
 }
 .pt-5 {
-  padding: 5px;
+  padding-top: 5px;
 }
 .pb-5 {
-  padding: 5px;
+  padding-bottom: 5px;
 }
 .pl-10 {
-  padding: 10px;
+  padding-left: 10px;
 }
 .pr-10 {
-  padding: 10px;
+  padding-right: 10px;
 }
 .pt-10 {
-  padding: 10px;
+  padding-top: 10px;
 }
 .pb-10 {
-  padding: 10px;
+  padding-bottom: 10px;
 }
 .m1 {
   padding: 10px;
@@ -140,28 +144,28 @@ div:focus {
   padding: 20px;
 }
 .ml-5 {
-  padding: 5px;
+  padding-left: 5px;
 }
 .mr-5 {
-  padding: 5px;
+  padding-right: 5px;
 }
 .mt-5 {
-  padding: 5px;
+  padding-top: 5px;
 }
 .mb-5 {
-  padding: 5px;
+  padding-bottom: 5px;
 }
 .ml-10 {
-  padding: 10px;
+  padding-left: 10px;
 }
 .mr-10 {
-  padding: 10px;
+  padding-right: 10px;
 }
 .mt-10 {
-  padding: 10px;
+  padding-top: 10px;
 }
 .mb-10 {
-  padding: 10px;
+  padding-bottom: 10px;
 }
 /* cursor 鼠标形状
 ------------------------------- */
