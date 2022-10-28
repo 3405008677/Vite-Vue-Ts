@@ -6,7 +6,6 @@ export const routerList = [
     meta: {
       title: "首页",
       elIcon: "House",
-      isHide: true,
       keepAlive: false,
     },
   },
@@ -17,7 +16,6 @@ export const routerList = [
     meta: {
       title: "house",
       elIcon: "Clock",
-      isHide: true,
       keepAlive: false,
     },
     children: [
@@ -27,7 +25,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "h-one",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -37,7 +34,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "h-two",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -47,7 +43,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "h-three",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -60,7 +55,6 @@ export const routerList = [
     meta: {
       title: "cat",
       elIcon: "Filter",
-      isHide: true,
       keepAlive: false,
     },
     children: [
@@ -70,7 +64,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "c-one",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -80,7 +73,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "c-two",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -90,7 +82,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "c-three",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -103,7 +94,6 @@ export const routerList = [
     meta: {
       title: "phone",
       elIcon: "Edit",
-      isHide: true,
       keepAlive: false,
     },
     children: [
@@ -113,7 +103,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "p-one",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -123,7 +112,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "p-two",
-          isHide: true,
           keepAlive: false,
         },
       },
@@ -133,7 +121,6 @@ export const routerList = [
         component: () => import("@/views/home.vue"),
         meta: {
           title: "p-three",
-          isHide: true,
           keepAlive: false,
         },
         children: [
@@ -143,7 +130,6 @@ export const routerList = [
             component: () => import("@/views/home.vue"),
             meta: {
               title: "p-two",
-              isHide: true,
               keepAlive: false,
             },
           },
@@ -153,7 +139,6 @@ export const routerList = [
             component: () => import("@/views/home.vue"),
             meta: {
               title: "p-two",
-              isHide: true,
               keepAlive: false,
             },
           },

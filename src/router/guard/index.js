@@ -25,20 +25,22 @@ export function beforeEach(router) {
         });
         return next(from.path);
       }
-      // 判断路由是否存在
+      // 判断路由是否存在  不存在则进入
       if (!router.hasRoute(to.name)) {
         // 判断本地是否有路由，如果有路由则是因为刷新导致路由丢失，重新渲染
         if (getRouterList()) {
           userStore.getRouterList();
+          console.log(to.path, to.fullPath);
           // return next({ path: to.path, replace: true });
           return next({ path: to.fullPath, replace: true, query: to.query });
+        } else {
+          ElNotification({
+            title: "路由不存在",
+            message: "别瞎点了！",
+            type: "error",
+          });
+          return next(from.path);
         }
-        ElNotification({
-          title: "路由不存在",
-          message: "别瞎点了！",
-          type: "error",
-        });
-        return next(from.path);
       }
       return next();
     } else {

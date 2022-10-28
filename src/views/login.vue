@@ -148,10 +148,8 @@ const onSignIn = async (e) => {
   isLoading.value = true;
   try {
     await form.value.validate();
-    //发送登录请求
-    // await userStore.login(formData.value);
-    userStore.getRouterList();
-    window.sessionStorage.setItem("token", "123");
+    // 发送登录请求
+    await userStore.login(formData.value);
     signSuccess();
     isLoading.value = false;
   } catch (e) {

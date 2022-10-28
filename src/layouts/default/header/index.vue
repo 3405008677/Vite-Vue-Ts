@@ -5,8 +5,8 @@
       <LayoutBreadcrumb class="pl-10" />
     </div>
     <div class="flex-a">
-      <div>123</div>
-      <div>qwe</div>
+      <div><LayoutfullScreen /></div>
+      <div><LayoutUserDropDown /></div>
       <div>//.,/</div>
     </div>
   </div>
@@ -14,6 +14,8 @@
 <script setup>
 import LayoutTrigger from "./components/trigger.vue";
 import LayoutBreadcrumb from "./components/breadcrumb.vue";
+import LayoutfullScreen from "./components/fullScreen.vue";
+import LayoutUserDropDown from "./components/userDropDown.vue";
 </script>
 <style scoped lang="scss">
 .header {

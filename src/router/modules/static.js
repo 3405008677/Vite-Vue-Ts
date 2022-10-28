@@ -12,7 +12,6 @@ export default [
         meta: {
           title: "首页",
           elIcon: "House",
-          isHide: true,
           keepAlive: false,
         },
       },

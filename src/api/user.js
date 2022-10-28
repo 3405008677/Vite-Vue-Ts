@@ -5,7 +5,7 @@ const loginApi = (params) => {
 };
 // 获取管理员路由
 const getMenuListApi = () => {
-  return request.get("/sys/menu/list");
+  return request.get("/sys/menu/list", { roleId: 1 });
 };
 // 获取用户信息
 const getUserInfoListApi = (token) => {
