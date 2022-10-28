@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { getToken, setToken, removeToken, setRouterList, getRouterList } from "@/utils/auth";
-import { resetRouter } from "@/router";
-import { addRouteList } from "@/router";
+import { resetRouter, addRouteList } from "@/router";
 import { formattingRouter } from "@/router/utils";
 // import { routerList as myRouterList } from "/mock/router";
 import { loginApi, getMenuListApi, getUserInfoListApi, logoutApi } from "@/api/user";
@@ -65,12 +64,11 @@ export default defineStore("user", {
       console.log(bean, "路由信息");
       let rs = formattingRouter(bean);
       console.log(rs, "初始化");
-      this.routerList = bean;
-      // // 动态添加权限
+      // 动态添加权限
       addRouteList(rs);
-      // // 设置本地router-list
+      // 设置本地router-list
       setRouterList(rs);
-      // // 更新到pinia
+      // 更新到pinia
       this.routerList = rs;
     },
     //退出登录
