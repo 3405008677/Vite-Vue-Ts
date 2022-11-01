@@ -2,7 +2,7 @@ export const routerList = [
   {
     path: "/home",
     name: "/home",
-    component: () => import("@/views/home.vue"),
+    component: () => import("/src/views/login.vue"),
     meta: {
       title: "首页",
       elIcon: "House",
@@ -22,7 +22,7 @@ export const routerList = [
       {
         path: "h-one",
         name: "/house/h-one",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
         meta: {
           title: "h-one",
           keepAlive: false,
@@ -31,7 +31,8 @@ export const routerList = [
       {
         path: "h-two",
         name: "/house/h-two",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "h-two",
           keepAlive: false,
@@ -40,7 +41,8 @@ export const routerList = [
       {
         path: "h-three",
         name: "/house/h-three",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "h-three",
           keepAlive: false,
@@ -61,7 +63,8 @@ export const routerList = [
       {
         path: "c-one",
         name: "/cat/c-one",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "c-one",
           keepAlive: false,
@@ -70,7 +73,8 @@ export const routerList = [
       {
         path: "c-two",
         name: "/cat/c-two",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "c-two",
           keepAlive: false,
@@ -79,7 +83,8 @@ export const routerList = [
       {
         path: "c-three",
         name: "/cat/c-three",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "c-three",
           keepAlive: false,
@@ -100,7 +105,8 @@ export const routerList = [
       {
         path: "p-one",
         name: "/phone/p-one",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "p-one",
           keepAlive: false,
@@ -109,7 +115,8 @@ export const routerList = [
       {
         path: "p-two",
         name: "/phone/p-two",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "p-two",
           keepAlive: false,
@@ -118,7 +125,8 @@ export const routerList = [
       {
         path: "p-three",
         name: "/phone/p-three",
-        component: () => import("@/views/home.vue"),
+        component: () => import("@/views/login.vue"),
+
         meta: {
           title: "p-three",
           keepAlive: false,
@@ -127,7 +135,8 @@ export const routerList = [
           {
             path: "p-three-one",
             name: "/phone/p-three/p-three-one",
-            component: () => import("@/views/home.vue"),
+            component: () => import("@/views/login.vue"),
+
             meta: {
               title: "p-two",
               keepAlive: false,
@@ -136,7 +145,8 @@ export const routerList = [
           {
             path: "p-three-tow",
             name: "/phone/p-three/p-three-tow",
-            component: () => import("@/views/home.vue"),
+            component: () => import("@/views/login.vue"),
+
             meta: {
               title: "p-two",
               keepAlive: false,

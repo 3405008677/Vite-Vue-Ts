@@ -2,13 +2,13 @@ export default [
   {
     path: "/",
     name: "/",
-    redirect: "/home",
+    redirect: { name: "home" },
     component: () => import("@/layouts/default/index.vue"),
     children: [
       {
         path: "/home",
         name: "/home",
-        component: () => import("@/views/demo/home/home.vue"),
+        component: () => import("@/views/login.vue"),
         meta: {
           title: "首页",
           elIcon: "House",

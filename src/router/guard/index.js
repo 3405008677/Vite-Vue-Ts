@@ -1,4 +1,4 @@
-import { getRouterList, getToken } from "@/utils/auth";
+import { getRouterNameList, getToken, getRouterList } from "@/utils/auth";
 import { userStore } from "@/store";
 import nProgress from "nprogress";
 // 进度条
@@ -25,22 +25,26 @@ export function beforeEach(router) {
         });
         return next(from.path);
       }
+      console.log(router.hasRoute(to.name), to.path, from.path, "路由是否存在");
+      console.log(router.options.routes, "路由");
       // 判断路由是否存在  不存在则进入
       if (!router.hasRoute(to.name)) {
         // 判断本地是否有路由，如果有路由则是因为刷新导致路由丢失，重新渲染
-        if (getRouterList()) {
+        let localRouter = getRouterNameList();
+        console.log(localRouter);
+        console.log("判断是否有此路由", localRouter.includes(to.name), to);
+        if (getRouterList() && localRouter.includes(to.path)) {
+          console.log("动态添加路由");
           userStore.getRouterList();
-          console.log(to.path, to.fullPath);
           // return next({ path: to.path, replace: true });
-          return next({ path: to.fullPath, replace: true, query: to.query });
-        } else {
-          ElNotification({
-            title: "路由不存在",
-            message: "别瞎点了！",
-            type: "error",
-          });
-          return next(from.path);
+          // return next({ path: to.fullPath, replace: true, query: to.query });
         }
+        ElNotification({
+          title: "路由不存在",
+          message: "别瞎点了！",
+          type: "error",
+        });
+        return next(from.path);
       }
       return next();
     } else {

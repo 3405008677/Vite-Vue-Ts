@@ -9,11 +9,7 @@
 <script setup>
 import { userStore } from "@/store";
 import { computed } from "@vue/reactivity";
-import { useRouter } from "vue-router";
-const router = useRouter();
-console.log(router.options.routes[0].children);
 const imageUrl = computed(() => {
-  console.log(userStore.info.image);
   if (userStore.info.image) {
     return userStore.info.image;
   } else {
