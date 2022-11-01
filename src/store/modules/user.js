@@ -46,8 +46,7 @@ export default defineStore("user", {
     // 获取管理员路由
     async getRouterList() {
       let { bean } = await getMenuListApi();
-      let rs = formattingRouter(bean);
-      console.log(rs);
+      let rs = formattingRouter(bean)
       // 动态添加权限
       addRouteList(rs);
       // 设置本地router-list
