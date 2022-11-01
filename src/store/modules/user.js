@@ -30,6 +30,7 @@ export default defineStore("user", {
             // 获取用户信息
             // this.getInfo()
             // 获取路由信息
+            console.log(1);
             this.getRouterList();
             resolve();
           })

@@ -25,7 +25,7 @@ export function beforeEach(router) {
         });
         return next(from.path);
       }
-      console.log(router.hasRoute(to.name), to.path, from.path, "路由是否存在");
+      console.log(router.hasRoute(to.name), to, from, "路由是否存在");
       console.log(router.options.routes, "路由");
       // 判断路由是否存在  不存在则进入
       if (!router.hasRoute(to.name)) {

@@ -10,7 +10,7 @@ export default [
         name: "/home",
         component: () => import("@/views/login.vue"),
         meta: {
-          title: "首页",
+          title: "爱山东",
           elIcon: "House",
           keepAlive: false,
         },

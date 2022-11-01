@@ -40,7 +40,7 @@ export const formattingRouter = (router, father = {}) => {
     } else {
       v.name = "/" + router[i].path;
     }
-    v.component = _import[`/src/views/demo${v.name}.vue`];
+    v.components = _import[`/src/views/demo${v.name}.vue`];
     meta.title = router[i].name;
     meta.elIcon = router[i].icon;
     meta.url = v.name;
@@ -50,7 +50,7 @@ export const formattingRouter = (router, father = {}) => {
     if (router[i].sysMenus != undefined && router[i].sysMenus.length) {
       v.redirect = v.name + "/" + router[i].sysMenus[0].path;
       v.children = formattingRouter(router[i].sysMenus, v);
-      v.component = () => {};
+      v.components = () => {};
     }
     // 针对一级路由
     if (router[i].parentId == "0") {
@@ -59,7 +59,7 @@ export const formattingRouter = (router, father = {}) => {
     // 针对home
     if (router[i].parentId == "0" && router[i].path == "home") {
       meta.url = v.name + v.name;
-      v.component = _import[`/src/views/demo${v.name + v.name}.vue`];
+      v.components = _import[`/src/views/demo${v.name + v.name}.vue`];
     }
     localRouter.push(v.name);
     temp.push(v);

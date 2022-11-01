@@ -149,7 +149,7 @@ const onSignIn = async (e) => {
   try {
     await form.value.validate();
     // 发送登录请求
-    await userStore.login(formData.value);
+    userStore.login(formData.value);
     signSuccess();
     isLoading.value = false;
   } catch (e) {

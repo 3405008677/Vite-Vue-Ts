@@ -39,6 +39,7 @@ export const addRouteList = (routerList, father = "/") => {
       addRouteList(item.children, item.name);
     }
   });
+  console.log(5);
 };
 /**
  * 清空路由
