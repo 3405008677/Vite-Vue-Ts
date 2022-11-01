@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import staticRouter from "./modules/static";
 import { guard } from "./guard";
+
 import "nprogress/nprogress.css";
 
 // 白名单
@@ -27,19 +28,16 @@ const router = createRouter({
  * @param routeList
  */
 export const addRouteList = (routerList, father = "/") => {
-  console.log(router.options.routes);
   routerList.forEach((item) => {
     let routeName = item.name;
     // 判断路由是否存在
     if (!router.hasRoute(routeName) || item.path == "/home") {
-      console.log(item);
       router.addRoute(father, item);
     }
     if (item.children) {
       addRouteList(item.children, item.name);
     }
   });
-  console.log(5);
 };
 /**
  * 清空路由

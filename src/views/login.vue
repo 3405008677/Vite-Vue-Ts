@@ -142,15 +142,15 @@ const form = ref(null),
   }),
   // 绑定验证码的值
   identifyCode = ref("");
-
 // 登录按钮
 const onSignIn = async (e) => {
   isLoading.value = true;
   try {
     await form.value.validate();
     // 发送登录请求
-    userStore.login(formData.value);
-    signSuccess();
+    userStore.login(formData.value).then((res) => {
+      signSuccess();
+    });
     isLoading.value = false;
   } catch (e) {
     isLoading.value = false;
