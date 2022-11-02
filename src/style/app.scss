@@ -16,8 +16,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
-    Microsoft YaHei, Arial, sans-serif;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial,
+    sans-serif;
 }
 #app {
   height: 100%;
@@ -104,7 +104,14 @@ div:focus {
 .aic {
   align-items: center !important;
 }
-
+/* height、width
+------------------------------- */
+.h {
+  height: 100%;
+}
+.w {
+  width: 100%;
+}
 /* padding、margin 边距
 ------------------------------- */
 .p1 {

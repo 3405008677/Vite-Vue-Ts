@@ -25,6 +25,10 @@ const viteConfig = defineConfig(({ mode }) => {
   env = loadEnv(mode, process.cwd());
   return {
     publicDir: "public",
+    resolve: {
+      alias,
+      extentsions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
+    },
     plugins: [
       vue(),
       visualizer(),
@@ -37,9 +41,12 @@ const viteConfig = defineConfig(({ mode }) => {
         resolvers: [ElementPlusResolver()],
       }),
     ],
-    resolve: {
-      alias,
-      extentsions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "@/style/index.scss";',
+        },
+      },
     },
     server: {
       host: true,
