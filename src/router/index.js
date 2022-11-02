@@ -14,6 +14,7 @@ const getRouteNames = (array = []) => {
 };
 getRouteNames(staticRouter);
 
+
 // app router
 const router = createRouter({
   history: createWebHashHistory(),
@@ -33,9 +34,6 @@ export const addRouteList = (routerList, father = "/") => {
     // 判断路由是否存在
     if (!router.hasRoute(routeName) || item.path == "/home") {
       router.addRoute(father, item);
-    }
-    if (item.children) {
-      addRouteList(item.children, item.name);
     }
   });
 };
