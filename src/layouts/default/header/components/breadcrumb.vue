@@ -17,4 +17,9 @@ const breadcrumbList = computed(() => {
   return arr;
 });
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+* {
+  color: $--header-size-color !important;
+  --el-text-color-placeholder: $--header-size-color;
+}
+</style>

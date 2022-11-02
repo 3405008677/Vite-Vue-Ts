@@ -31,6 +31,9 @@ const urlClick = () => {
 };
 </script>
 <style scoped lang="scss">
+* {
+  color: $--header-size-color;
+}
 .userImage {
   border-radius: 50%;
   margin: 0 10px;

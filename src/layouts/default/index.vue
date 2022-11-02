@@ -30,8 +30,10 @@ import { appStore } from "@/store";
     height: 100%;
   }
   .header {
-    background-color: pink;
+    padding-right: 20px;
+    background-color: $--header-bg-color;
     --el-header-height: 56px;
+    --el-header-padding: 0;
   }
 }
 </style>
