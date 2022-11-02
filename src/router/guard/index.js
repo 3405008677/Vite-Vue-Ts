@@ -32,10 +32,8 @@ export function beforeEach(router) {
         let localRouter = getRouterNameList()
         if (getRouterList() && localRouter.includes(to.path)) {
           userStore.getRouterList().then(res => {
-            console.log(to, from)
             return next({ path: to.fullPath, replace: true, query: to.query })
           })
-          // addRouteList(getRouterList())
         } else {
           ElNotification({
             title: '路由不存在',

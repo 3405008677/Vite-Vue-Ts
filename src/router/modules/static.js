@@ -2,15 +2,15 @@ export default [
   {
     path: '/',
     name: '/',
-    redirect: 'home',
+    redirect: '/home',
     component: () => import('@/layouts/default/index.vue'),
     children: [
       {
         path: '/home',
         name: '/home',
-        component: () => import('/src/views/demo/home/home.vue'),
+        component: () => import('@/views/demo/home/home.vue'),
         meta: {
-          title: '爱山东',
+          title: '洛克萨斯',
           elIcon: 'House',
           keepAlive: false
         }
@@ -25,7 +25,7 @@ export default [
       needLogin: false,
       keepAlive: false
     },
-    component: () => import('@/views/login.vue')
+    component: () => import('@/views/sys/login.vue')
   },
   {
     path: '/404',
@@ -35,7 +35,7 @@ export default [
       needLogin: false,
       keepAlive: false
     },
-    component: () => import('@/views/404.vue')
+    component: () => import('@/views/sys/404.vue')
   },
   {
     path: '/401',
@@ -45,6 +45,6 @@ export default [
       needLogin: false,
       keepAlive: false
     },
-    component: () => import('@/views/401.vue')
+    component: () => import('@/views/sys/401.vue')
   }
 ]

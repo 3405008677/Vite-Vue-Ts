@@ -7,7 +7,7 @@
     <div class="flex-a">
       <div><LayoutfullScreen /></div>
       <div><LayoutUserDropDown /></div>
-      <div>//.,/</div>
+      <div><LayoutUserDropDown /></div>
     </div>
   </div>
 </template>

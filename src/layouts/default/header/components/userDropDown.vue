@@ -27,7 +27,7 @@ const imageUrl = computed(() => {
 });
 const urlClick = () => {
   console.log(route);
-  console.log(router.options);
+  console.log(router.getRoutes());
 };
 </script>
 <style scoped lang="scss">
