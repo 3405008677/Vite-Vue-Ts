@@ -9,7 +9,6 @@
     <div class="flex-a h">
       <div class="hover flex-a cursor-pointer"><LayoutfullScreen /></div>
       <div class="hover flex-a cursor-pointer"><LayoutUserDropDown /></div>
-      <div class="hover flex-a cursor-pointer"><LayoutUserDropDown /></div>
     </div>
   </div>
 </template>

@@ -7,13 +7,12 @@ const loginApi = (params) => {
 const getMenuListApi = () => {
   return request.get("/sys/menu/list", { roleId: 1 });
 };
-// 获取用户信息
+// 获取指定用户信息
+const getUserInfoApi = (id) => {
+  return request.get("sys/user/info", id);
+};
+// 获取所有用户信息
 const getUserInfoListApi = (token) => {
   return request.get("/sys/user/infoList", token);
 };
-//退出
-const logoutApi = () => {
-  return request.post("/logout");
-};
-
-export { loginApi, getMenuListApi, getUserInfoListApi, logoutApi };
+export { loginApi, getMenuListApi, getUserInfoListApi, getUserInfoApi };

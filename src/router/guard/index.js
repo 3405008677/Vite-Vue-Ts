@@ -14,7 +14,6 @@ export function beforeEach(router) {
     nProgress.start()
     loading = ElLoading.service({
       text: '拼命加载中...',
-      background: 'rgba(178,215,173,1)'
     })
     const token = getToken()
     if (token) {

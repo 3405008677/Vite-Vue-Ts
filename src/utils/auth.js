@@ -2,22 +2,22 @@ import { Session } from "./storage";
 
 // 存储基本信息
 const setUserInfo = (info) => {
-  return Session.set(import.meta.env.VITE_WEB_INFO, info);
+  return Session.set(import.meta.env.VITE_WEB_INFO || "USER-INFO", info);
 };
 
 //获取基本信息
-const getUserInfo = (info) => {
-  return Session.get(import.meta.env.VITE_WEB_INFO) || {};
+const getUserInfo = () => {
+  return Session.get(import.meta.env.VITE_WEB_INFO || "USER-INFO") || {};
 };
 
 //存储token
 const setToken = (token) => {
-  return Session.set("token", token);
+  return Session.set("TOKEN", token);
 };
 
 // 获取token
 const getToken = () => {
-  return Session.get("token");
+  return Session.get("TOKEN");
 };
 
 // 存储管理员路由
@@ -43,7 +43,7 @@ const getRouterNameList = () => {
 };
 // 退出登录
 const removeToken = () => {
-  return Session.remove("token");
+  return Session.remove("TOKEN");
 };
 
 export {

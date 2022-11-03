@@ -11,10 +11,9 @@ const getRouteNames = (array = []) => {
     WHITE_NAME_LIST.push(item.name);
     getRouteNames(item.children || []);
   });
+  return array;
 };
 getRouteNames(staticRouter);
-
-
 // app router
 const router = createRouter({
   history: createWebHashHistory(),
@@ -29,10 +28,19 @@ const router = createRouter({
  * @param routeList
  */
 export const addRouteList = (routerList, father = "/") => {
+  // const addrouter = {
+  //   path: "/",
+  //   name: "/",
+  //   redirect: "/home",
+  //   meta: {},
+  //   children: routerList,
+  //   component: () => import("@/layouts/default/index.vue"),
+  // };
+  // router.addRoute(father, addrouter);
   routerList.forEach((item) => {
     let routeName = item.name;
     // 判断路由是否存在
-    if (!router.hasRoute(routeName) || item.path == "/home") {
+    if (!router.hasRoute(routeName) || item.path == "home") {
       router.addRoute(father, item);
     }
   });

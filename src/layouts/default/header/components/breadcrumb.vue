@@ -12,8 +12,15 @@ import { computed } from "@vue/reactivity";
 import { useRoute } from "vue-router";
 const route = useRoute();
 const breadcrumbList = computed(() => {
-  let arr = route.matched;
-  arr.splice(0, 1);
+  /**
+   * 此处有大坑
+   * 之前用的是splice
+   * splice可以改变原数组的值
+   * 使用后route.matched上面的数组少了一个
+   * 导致当route为根下面子路由时 component 不显示
+   * 所有慎用 可以导致原数组发送改变
+   */
+  let arr = route.matched.slice(1);
   return arr;
 });
 </script>

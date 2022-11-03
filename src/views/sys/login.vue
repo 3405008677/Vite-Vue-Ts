@@ -17,7 +17,7 @@
           :model="formData"
           :rules="rules"
         >
-          <el-form-item prop="username" class="login-animation1">
+          <el-form-item prop="username" class="pt-10 pb-10 login-animation1">
             <el-input
               v-model="formData.username"
               type="text"
@@ -33,7 +33,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item prop="password" class="login-animation2">
+          <el-form-item prop="password" class="pt-10 pb-10 login-animation2">
             <el-input
               v-model="formData.password"
               placeholder="请输入密码"
@@ -48,7 +48,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item prop="code" class="login-animation3">
+          <el-form-item prop="code" class="pt-10 pb-10 login-animation3">
             <el-col :span="15">
               <el-input
                 v-model="formData.code"
@@ -71,7 +71,7 @@
               <VerificationVue v-model="identifyCode" types="number" />
             </el-col>
           </el-form-item>
-          <el-form-item class="login-animation4">
+          <el-form-item class="pt-10 pb-10 login-animation4">
             <el-button
               type="primary"
               class="login-content-submit"
@@ -164,6 +164,11 @@ const signSuccess = () => {
   } else {
     router.replace("/home");
   }
+  ElNotification({
+    title: "登录成功",
+    message: "welcome go home ~",
+    type: "success",
+  });
 };
 </script>
 
@@ -196,7 +201,6 @@ const signSuccess = () => {
         color: var(--el-color-primary);
       }
     }
-
     &::before {
       content: "";
       position: absolute;
@@ -209,7 +213,6 @@ const signSuccess = () => {
       background: var(--el-color-primary-light-5);
       transition: all 0.3s ease;
     }
-
     &::after {
       content: "";
       width: 150px;
@@ -221,7 +224,6 @@ const signSuccess = () => {
       background: var(--el-color-primary-light-5);
       transition: all 0.3s ease;
     }
-
     &-icon {
       width: 60%;
       height: 70%;
@@ -230,7 +232,6 @@ const signSuccess = () => {
       bottom: 0;
     }
   }
-
   .login-content {
     width: 500px;
     padding: 20px;
@@ -243,11 +244,9 @@ const signSuccess = () => {
     border-radius: 5px;
     overflow: hidden;
     z-index: 1;
-
     .login-content-main {
       margin: 0 auto;
       width: 80%;
-
       .login-content-title {
         color: var(--el-text-color-primary);
         font-weight: 500;
@@ -260,11 +259,9 @@ const signSuccess = () => {
         position: relative;
         transition: all 0.3s ease;
       }
-
       // 账号密码框
       .login-content-form {
         margin-top: 20px;
-
         @for $i from 1 through 4 {
           .login-animation#{$i} {
             opacity: 0;
@@ -274,7 +271,6 @@ const signSuccess = () => {
             animation-delay: calc($i / 10) + s;
           }
         }
-
         .login-content-password {
           display: inline-block;
           width: 20px;
@@ -284,14 +280,12 @@ const signSuccess = () => {
             color: #909399;
           }
         }
-
         .login-content-code {
           width: 100%;
           padding: 0;
           font-weight: bold;
           letter-spacing: 5px;
         }
-
         .login-content-submit {
           width: 100%;
           letter-spacing: 2px;
@@ -300,7 +294,6 @@ const signSuccess = () => {
         }
       }
     }
-
     .login-content-main-sacn {
       position: absolute;
       top: 0;
@@ -311,7 +304,6 @@ const signSuccess = () => {
       cursor: pointer;
       transition: all ease 0.3s;
       color: var(--el-text-color-primary);
-
       &-delta {
         position: absolute;
         width: 35px;
@@ -322,13 +314,11 @@ const signSuccess = () => {
         background: var(--el-color-white);
         transform: rotate(-45deg);
       }
-
       &:hover {
         opacity: 1;
         transition: all ease 0.3s;
         color: var(--el-color-primary) !important;
       }
-
       i {
         width: 47px;
         height: 50px;
