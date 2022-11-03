@@ -7,17 +7,21 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item icon="House">主页</el-dropdown-item>
-        <el-dropdown-item divided icon="Lock">锁定屏幕</el-dropdown-item>
+        <el-dropdown-item divided icon="Lock" @click="isLock = !isLock">锁定屏幕</el-dropdown-item>
         <el-dropdown-item icon="SwitchButton" @click="quit">退出</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
+  <Lock v-model="isLock" />
 </template>
 <script setup>
+import { ref } from "vue";
 import { userStore } from "@/store";
 import { computed } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import Lock from "./lock.vue";
 const router = useRouter();
+const isLock = ref(false);
 const imageUrl = computed(() => {
   if (userStore.info.image) {
     return userStore.info.image;

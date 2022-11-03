@@ -16,7 +16,7 @@
 import LayoutTrigger from "./components/trigger.vue";
 import LayoutBreadcrumb from "./components/breadcrumb.vue";
 import LayoutfullScreen from "./components/fullScreen.vue";
-import LayoutUserDropDown from "./components/userDropDown.vue";
+import LayoutUserDropDown from "./components/userDropDown/index.vue";
 </script>
 <style scoped lang="scss">
 .header {
