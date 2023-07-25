@@ -8,8 +8,8 @@
   text-decoration: none;
 }
 html {
-  height: 100%;
-  box-sizing: border-box;
+  height: 100% ;
+  box-sizing: border-box ;
 }
 body {
   height: 100%;
@@ -18,24 +18,32 @@ body {
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial,
     sans-serif;
+  cursor: url(https://qny.aqingya.cn/blog/default%20.cur), default;
+  background: #f6f6f6;
 }
 #app {
   height: 100%;
 }
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+a,
+img {
+  cursor: url(https://qny.aqingya.cn/blog/pointer.cur), default;
 }
 .no-padding {
   padding: 0px !important;
 }
-a:focus,
-a:active {
-  outline: none;
-}
 div:focus {
   outline: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  word-wrap: break-word;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+  overflow-wrap: break-word;
 }
 
 /* 文本溢出隐藏
@@ -52,7 +60,7 @@ div:focus {
     visibility: hidden;
     display: block;
     font-size: 0;
-    content: " ";
+    content: ' ';
     clear: both;
     height: 0;
   }
@@ -74,6 +82,11 @@ div:focus {
 .flex-a {
   display: flex;
   align-items: center;
+}
+.flex-c {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .flex-auto {
   flex: 1;
@@ -176,9 +189,10 @@ div:focus {
 }
 /* cursor 鼠标形状
 ------------------------------- */
+
 // 默认
 .cursor-default {
-  cursor: default !important;
+  cursor: url('@/assets/image/auto.png'), auto;
 }
 // 帮助
 .cursor-help {
@@ -186,7 +200,7 @@ div:focus {
 }
 // 手指
 .cursor-pointer {
-  cursor: pointer !important;
+  cursor: url(https://qny.aqingya.cn/blog/pointer.cur), default;
 }
 // 移动
 .cursor-move {
@@ -227,4 +241,25 @@ div:focus {
 }
 .color-info {
   color: var(--el-color-info);
+}
+
+// 阿里字体图标设置
+.icon,
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+// 鼠标经过动画
+.myImgHover {
+  transition: filter 375ms ease-in 0.2s, transform 0.6s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.avatar-img {
+  transition: filter 375ms ease-in 0.2s, transform 0.3s;
 }

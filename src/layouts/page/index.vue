@@ -15,5 +15,5 @@
     <template #fallback>Loading...</template>
   </Suspense>
 </template>
-<script setup></script>
+<script lang="ts" setup></script>
 <style scoped lang="scss"></style>

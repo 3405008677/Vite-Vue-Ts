@@ -1,14 +1,13 @@
 <template>
-  <el-tooltip class="box-item" effect="dark" content="全屏" placement="bottom">
-    <el-icon @click="toggle"><FullScreen /></el-icon>
-  </el-tooltip>
+  <el-icon size="20" @click="setIsFull"><FullScreen /></el-icon>
 </template>
-<script setup>
-import { useFullscreen } from "@vueuse/core";
-const { toggle } = useFullscreen();
+<script lang="ts" setup>
+  const setIsFull = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen()
+    } else {
+      document.children[0].requestFullscreen()
+    }
+  }
 </script>
-<style scoped lang="scss">
-* {
-  color: $--header-size-color;
-}
-</style>
+<style lang="scss"></style>

@@ -1,39 +1,17 @@
 <template>
-  <div class="common-layout">
+  <el-container class="h100vh bg-white">
+    <el-aside class="w-auto!"><Aside class="h100%" /></el-aside>
     <el-container>
-      <el-aside v-if="appStore.showSidebar" width="auto">
-        <LayoutSideBar />
-      </el-aside>
-      <el-container>
-        <el-header class="header flex-a">
-          <LayoutHeader />
-        </el-header>
-        <el-main>
-          <LayoutContent />
-          <LayoutFooter />
-        </el-main>
-      </el-container>
+      <el-header class="no-padding h48px!"><Header /></el-header>
+      <el-main><Main /></el-main>
     </el-container>
-  </div>
+  </el-container>
 </template>
-<script setup>
-import LayoutSideBar from "./sider/index.vue";
-import LayoutHeader from "./header/index.vue";
-import LayoutContent from "./content/index.vue";
-import LayoutFooter from "./footer/index.vue";
-import { appStore } from "@/store";
+<script lang="ts" setup>
+  import Aside from './aside/index.vue'
+  import Header from './header/index.vue'
+  import Main from './main/index.vue'
 </script>
-<style scoped lang="scss">
-.common-layout {
-  height: 100%;
-  .el-container {
-    height: 100%;
-  }
-  .header {
-    padding-right: 20px;
-    background-color: $--header-bg-color;
-    --el-header-height: 56px;
-    --el-header-padding: 0;
-  }
-}
+<style lang="scss">
+  // 此注释别删，有莫名的 bug + 别开 scoped
 </style>

@@ -1,33 +1,18 @@
 <template>
-  <div class="flex-a header h">
-    <div class="flex-a h">
-      <span class="flex-a hover cursor-pointer">
-        <LayoutTrigger />
-      </span>
-      <LayoutBreadcrumb class="pl-10" />
+  <div class="h-48px flex flex-items-center flex-justify-between b-b-solid b-b-#eee b-b-1px">
+    <div class="flex flex-items-center">
+      <HeaderTriggerVue />
+      <LayoutBreadcrumbVue class="pl-10px" />
     </div>
-    <div class="flex-a h">
-      <div class="hover flex-a cursor-pointer"><LayoutfullScreen /></div>
-      <div class="hover flex-a cursor-pointer"><LayoutUserDropDown /></div>
+    <div>
+      <FullScreenVue />
     </div>
   </div>
 </template>
-<script setup>
-import LayoutTrigger from "./components/trigger.vue";
-import LayoutBreadcrumb from "./components/breadcrumb.vue";
-import LayoutfullScreen from "./components/fullScreen.vue";
-import LayoutUserDropDown from "./components/userDropDown/index.vue";
+<script lang="ts" setup>
+  import { appStore } from '@/store'
+  import HeaderTriggerVue from './components/HeaderTrigger.vue'
+  import LayoutBreadcrumbVue from './components/LayoutBreadcrumb.vue'
+  import FullScreenVue from './components/FullScreen.vue'
 </script>
-<style scoped lang="scss">
-.header {
-  width: 100%;
-  justify-content: space-between;
-}
-.hover {
-  height: 100%;
-  padding: 1px 10px 0;
-  &:hover {
-    background-color: $--header-bg-hover-color;
-  }
-}
-</style>
+<style lang="scss"></style>
