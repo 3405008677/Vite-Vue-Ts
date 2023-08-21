@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getToken } from '../auth'
 
 const request = axios.create({
-  baseURL: import.meta.env.VITE_BASE_REL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 50000,
   headers: {},
 })
@@ -10,7 +10,6 @@ const request = axios.create({
 // request interceptor
 request.interceptors.request.use(
   (config: any) => {
-
     // 设置请求头
     config!.headers['ContentType'] = `application/json;charset=UTF-8`
     // request before judge

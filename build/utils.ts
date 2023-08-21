@@ -8,7 +8,6 @@ export function wrapperEnv(envConf: Recordable): ViteEnv {
     let realName = envConf[envName].replace(/\\n/g, '\n')
     // 如果是boolean类型就转换
     realName = realName === 'true' ? true : realName === 'false' ? false : realName
-
     if (envName === 'VITE_PORT') {
       realName = Number(realName)
     }
