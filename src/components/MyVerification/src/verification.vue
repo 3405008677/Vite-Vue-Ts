@@ -3,10 +3,11 @@
     <canvas id="v-canvas" :width="contentWidth" :height="contentHeight"></canvas>
   </div>
 </template>
-
 <script lang="ts" setup>
+  /**
+   * 验证码组件
+   */
   import { onMounted, nextTick } from 'vue'
-
   const emit = defineEmits(['update:modelValue'])
   const props = defineProps({
     modelValue: {
@@ -15,7 +16,7 @@
       default: '1234',
     },
     types: {
-      // 验证码类型
+      // 验证码类型  默认 'default' 英文+数字    数字 'number'    英文　'english'
       type: String,
       default: 'default',
     },
@@ -68,7 +69,7 @@
     case 'number':
       codeType = '1234567890'
       break
-    case 'string':
+    case 'english':
       codeType = 'abcdefjhijklinopqrsduvwxyz'
       break
     default:
