@@ -1,9 +1,13 @@
+import text from './routerDate' //测试用的路由
+
+
 export default [
   {
     path: '/',
     name: '/',
     redirect: '/home',
-    component: () => import('@/layouts/default/index.vue'),
+    // component: () => import('@/layouts/default/index.vue'),//后台管理形式
+    component: () => import('@/layouts/page/index.vue'),//单页面形式
     children: [
       {
         path: '404',
