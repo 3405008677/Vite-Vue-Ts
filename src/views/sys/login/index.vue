@@ -88,8 +88,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue'
-  import { useRouter, useRoute } from 'vue-router'
+  import { ElNotification } from 'element-plus'
   import { MyVerification } from '@/components/MyVerification'
   import { userStore } from '@/store'
   const router = useRouter()
@@ -118,7 +117,7 @@
       { required: true, message: 'Please Enter Verification', trigger: 'blur' },
       { len: 4, message: 'Verification Length Should be 4', trigger: 'blur' },
       {
-        validator: (rule: string, value: string, callback: Function) => {
+        validator: (rule: any, value: string, callback: Function) => {
           formData.value.code == identifyCode.value
             ? callback()
             : callback(new Error('Value Error Please Retype'))

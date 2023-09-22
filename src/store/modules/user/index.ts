@@ -56,7 +56,6 @@ export default defineStore('user', {
     // 获取管理员路由
     async getRouterList(uid: number) {
       let { data } = await userApi.getRouterMenuListApi({ uid })
-      // @ts-ignore
       data = formattingRouter(data)
       addRouterList(data)
       setRouterList(data)

@@ -2,7 +2,7 @@ import type { Router } from 'vue-router'
 import { getToken, getRouterNameList, getRouterList } from '@/utils/auth'
 import nProgress from 'nprogress'
 import { userStore } from '@/store'
-
+import { ElNotification, ElLoading } from 'element-plus'
 // nprogres state
 nProgress.configure({ showSpinner: false })
 

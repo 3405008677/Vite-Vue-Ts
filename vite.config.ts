@@ -16,21 +16,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     root, //项目根目录
     resolve: {
       alias: [
-        {
-          find: /@\//,
-          replacement: pathResolve('src') + '/',
-        },
-        {
-          find: /#\//,
-          replacement: pathResolve('types') + '/',
-        },
+        { find: /@\//, replacement: pathResolve('src') + '/' },
+        { find: /#\//, replacement: pathResolve('types') + '/' },
       ],
     },
     css: {
+      // 适合只引入scss变量，不适合全局样式
       preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@/style/index.scss";',
-        },
+        // scss: { additionalData: '@import "@/style/index.scss";' },
       },
     },
     server: {
@@ -43,7 +36,20 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       pure: viteEnv.VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
     },
     build: {
+      rollupOptions: {
+        external: ['vue'],
+        output: {
+          chunkFileNames: 'src/js/[name]-[hash].js',
+          assetFileNames: 'src/css/[name]-[hash].css',
+        },
+      },
+      assetsDir: 'src/assets/',
       target: 'modules',
+      outDir: 'dist',
+      // 是否复制Public文件
+      copyPublicDir: true,
+      // 构建时清空该目录
+      emptyOutDir: true,
       //启用gzip压缩大小报告-关闭可能会提高大型项目构建性能
       reportCompressedSize: false,
       minify: 'esbuild', //混淆器

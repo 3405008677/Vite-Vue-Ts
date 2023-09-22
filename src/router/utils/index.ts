@@ -26,7 +26,7 @@ export const changeUrl = (url: string, key: string, keyVal: string) => {
 /**
  * 格式化路由列表
  */
-export const formattingRouter = (router: Array<RouteRule>, father: RouteRule) => {
+export const formattingRouter = (router: Array<RouteRule>, father?: RouteRule) => {
   let temp: Array<RouteRule> = []
   let localRouter: Array<string> = []
   for (let i = 0; i < router.length; i++) {

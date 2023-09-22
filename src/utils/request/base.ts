@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getToken } from '../auth'
+import { ElNotification } from 'element-plus'
 
 const request = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
