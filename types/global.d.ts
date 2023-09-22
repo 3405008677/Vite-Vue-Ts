@@ -7,6 +7,7 @@ declare global {
     VITE_PROXY: [string, string][]
     VITE_PUBLIC_PATH: string
     VITE_DROP_CONSOLE: boolean
+    VITE_HTTPS:boolean
   }
 }
 declare global {

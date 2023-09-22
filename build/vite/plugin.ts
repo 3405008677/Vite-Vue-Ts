@@ -9,6 +9,8 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from "unocss/vite";
 
+import mkcert from 'vite-plugin-mkcert'
+
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [vue(), vueJsx()]
   vitePlugins.push(
@@ -34,5 +36,10 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
       configFile: "/build/uno.config.ts",
     }),
   )
+
+  if(viteEnv.VITE_HTTPS){
+    vitePlugins.push(mkcert() )
+  }
+
   return vitePlugins
 }
