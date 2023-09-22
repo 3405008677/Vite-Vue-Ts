@@ -3,7 +3,7 @@ import Mock from 'mockjs'
 const proxy = import.meta.env.VITE_BASE_URL
 
 // 根据.env中的VITE_USE_MOCK判断是否开启mock
-if (import.meta.env.VITE_USE_MOCK) {
+if (import.meta.env.VITE_USE_MOCK === 'true') {
   Mock.mock(proxy + '/login', 'post', (options) => {
     return {
       code: 200,
