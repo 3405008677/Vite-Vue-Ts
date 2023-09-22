@@ -18,14 +18,7 @@
           :rules="rules"
         >
           <el-form-item prop="username" class="pt-10 pb-10 login-animation1">
-            <el-input
-              v-model="formData.username"
-              type="text"
-              placeholder="请输入账号"
-              clearable
-              :readonly="readonlyInput.username"
-              @focus="readonlyInput.username = !readonlyInput.username"
-            >
+            <el-input v-model="formData.username" type="text" placeholder="请输入账号" clearable>
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <user />
@@ -34,13 +27,7 @@
             </el-input>
           </el-form-item>
           <el-form-item prop="password" class="pt-10 pb-10 login-animation2">
-            <el-input
-              v-model="formData.password"
-              placeholder="请输入密码"
-              show-password
-              :readonly="readonlyInput.password"
-              @focus="readonlyInput.password = !readonlyInput.password"
-            >
+            <el-input v-model="formData.password" placeholder="请输入密码" show-password>
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <unlock />
@@ -48,7 +35,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item prop="verification" class="pt-10 pb-10 login-animation3">
+          <el-form-item prop="code" class="pt-10 pb-10 login-animation3">
             <el-col :span="15">
               <el-input
                 v-model="formData.code"
@@ -134,11 +121,6 @@
   })
   const form: any = ref(null),
     isLoading = ref(false),
-    // 设置form不自动补全
-    readonlyInput = ref({
-      username: true,
-      password: true,
-    }),
     // 绑定验证码的值
     identifyCode = ref('')
   // 登录按钮

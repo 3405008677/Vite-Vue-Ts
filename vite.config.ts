@@ -37,10 +37,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     },
     build: {
       rollupOptions: {
-        external: ['vue'],
         output: {
           chunkFileNames: 'src/js/[name]-[hash].js',
-          assetFileNames: 'src/css/[name]-[hash].css',
+          assetFileNames: 'src/css/[name].css',
         },
       },
       assetsDir: 'src/assets/',
