@@ -19,4 +19,14 @@ export default [
     },
     component: () => import('@/views/sys/login/index.vue'),
   },
+  {
+    path: '/404',
+    name: '404',
+    meta: {
+      title: '错误',
+      needLogin: false,
+      keepAlive: false,
+    },
+    component: () => import('@/views/sys/error/404.vue'),
+  },
 ]
