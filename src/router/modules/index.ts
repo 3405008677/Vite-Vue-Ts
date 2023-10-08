@@ -5,8 +5,8 @@ export default [
     path: '/',
     name: '/',
     redirect: '/home',
-    component: () => import('@/layouts/default/index.vue'), //后台管理形式
-    // component: () => import('@/layouts/page/index.vue'),//单页面形式
+    // component: () => import('@/layouts/default/index.vue'), //后台管理形式
+    component: () => import('@/layouts/page/index.vue'),//单页面形式
     children: [],
   },
   {
