@@ -21,7 +21,7 @@ class request {
   static put = (url: string, data?: ParamsType, headers?: object) => {
     return axios({
       url,
-      method: 'GET',
+      method: 'PUT',
       data,
     })
   }

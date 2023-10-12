@@ -8,7 +8,7 @@ export interface UserState {
   routerList: Array<UserInfo>
 }
 
-import type { Login } from '@/api/login/rule'
+import type { LoginType } from '@/api/login/rule'
 import loginApi from '@/api/login'
 import userApi from '@/api/user'
 import { defineStore } from 'pinia'
@@ -33,7 +33,7 @@ export default defineStore('user', {
   },
   actions: {
     // 登录
-    async login(userinfo: Login) {
+    async login(userinfo: LoginType) {
       const { username, password } = userinfo
       let { data } = await loginApi.login({ username: username.trim(), password: password.trim() })
       this.token = data.token

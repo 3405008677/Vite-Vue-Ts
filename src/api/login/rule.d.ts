@@ -1,7 +1,7 @@
 /**
  * 登录
  */
-export interface Login {
+export interface LoginType {
   username: string
   password: string
 }

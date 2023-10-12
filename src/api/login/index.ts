@@ -1,4 +1,4 @@
-import { Login } from './rule'
+import { LoginType } from './rule'
 import request from '@/utils/request'
 
 /**
@@ -6,10 +6,17 @@ import request from '@/utils/request'
  * @params username 用户名
  * @params password 密码
  */
-const login = (data: Login) => {
+const login = (data: LoginType) => {
   return request.post('/login', data)
+}
+/**
+ * 退出
+ */
+const logout = () => {
+  return request.get('/logout')
 }
 
 export default {
   login,
+  logout,
 }

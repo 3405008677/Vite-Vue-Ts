@@ -5,12 +5,11 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { router, setupRouter } from '@/router'
 import { setupRouterGuard } from './router/guard'
 import { setupStore } from '@/store'
-import { clickEffect } from '@/utils/special/mouseClick'
 import '../mock'
 import 'virtual:uno.css'
 import 'element-plus/dist/index.css'
 // 引入自定义样式
-import "@/style/index.scss";
+import '@/style/index.scss'
 async function bootstrap() {
   const app = createApp(App)
   // 配置 store
@@ -23,7 +22,6 @@ async function bootstrap() {
     app.component(key, component)
   }
   app.mount('#app')
-  // clickEffect()
 }
 
 bootstrap()

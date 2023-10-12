@@ -33,7 +33,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       strictPort: false,
     },
     esbuild: {
-      pure: viteEnv.VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
+      drop: viteEnv.VITE_DROP_CONSOLE ? ['console', 'debugger'] : [], //删除所有的console和debugger
     },
     build: {
       rollupOptions: {
