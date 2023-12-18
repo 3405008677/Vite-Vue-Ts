@@ -73,6 +73,13 @@ export function getNowFormatDate() {
     strDate: number | string = date.getDate() // 获取当前日(1-31)
   if (month < 10) month = `0${month}` // 如果月份是个位数，在前面补0
   if (strDate < 10) strDate = `0${strDate}` // 如果日是个位数，在前面补0
-
   return `${year}-${month}-${strDate}`
+}
+
+/**
+ * 判断当前是环境否是为微信
+ */
+export function isWXChrome() {
+  let info = navigator.userAgent.toLowerCase()
+  return !/wxwork/i.test(info) && /MicroMessenger/i.test(info)
 }
