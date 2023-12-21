@@ -17,7 +17,7 @@
           :model="formData"
           :rules="rules"
         >
-          <el-form-item prop="username" class="pt-10 pb-10 login-animation1">
+          <el-form-item prop="username" class="pt-10px pb-10px login-animation1">
             <el-input v-model="formData.username" type="text" placeholder="请输入账号" clearable>
               <template #prefix>
                 <el-icon class="el-input__icon">
@@ -26,7 +26,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item prop="password" class="pt-10 pb-10 login-animation2">
+          <el-form-item prop="password" class="pt-10px pb-10px login-animation2">
             <el-input v-model="formData.password" placeholder="请输入密码" show-password>
               <template #prefix>
                 <el-icon class="el-input__icon">
@@ -35,7 +35,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item prop="code" class="pt-10 pb-10 login-animation3">
+          <el-form-item prop="code" class="pt-10px pb-10px login-animation3">
             <el-col :span="15">
               <el-input
                 v-model="formData.code"
@@ -58,7 +58,7 @@
               <MyVerification v-model="identifyCode" types="number" />
             </el-col>
           </el-form-item>
-          <el-form-item class="pt-10 pb-10 login-animation4">
+          <el-form-item class="pt-10px pb-10px login-animation4">
             <el-button
               type="primary"
               class="login-content-submit"
