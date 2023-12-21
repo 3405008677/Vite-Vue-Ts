@@ -23,6 +23,35 @@ import {
   setRouterList,
   getRouterList,
 } from '@/utils/auth'
+let routerere = [
+  {
+    icon: 'system',
+    list: [
+      {
+        icon: 'admin',
+        list: [],
+        menuId: 2,
+        name: '管理员管理',
+        open: null,
+        orderNum: 0,
+        parentId: 0,
+        parentName: null,
+        perms: null,
+        type: 1,
+        url: 'sys/user',
+      },
+    ],
+    menuId: 1,
+    name: '系统管理',
+    open: null,
+    orderNum: 0,
+    parentId: 0,
+    parentName: null,
+    perms: null,
+    type: 0,
+    url: null,
+  },
+]
 export default defineStore('user', {
   state: (): UserState => {
     return {
@@ -38,25 +67,27 @@ export default defineStore('user', {
       let { data } = await loginApi.login({ username: username.trim(), password: password.trim() })
       this.token = data.token
       setToken(data.token)
-      this.getInfo(data.uid)
-      await this.getRouterList(data.uid)
+      await this.getInfo()
+      await this.getRouterList()
     },
     // 退出
     async logout() {
       this.token = ''
       Session.clear()
       resetRouter()
+      location.reload()
     },
     // 获取用户信息
-    async getInfo(uid: number) {
-      let { data } = await userApi.getUserInfoApi({ uid })
+    async getInfo() {
+      let { data } = await userApi.getUserInfoApi()
       this.userInfo = data
       setUserInfo(data)
     },
     // 获取管理员路由
-    async getRouterList(uid: number) {
-      let { data } = await userApi.getRouterMenuListApi({ uid })
+    async getRouterList() {
+      let { data } = await userApi.getRouterMenuListApi()
       data = formattingRouter(data)
+      console.log(data)
       addRouterList(data)
       setRouterList(data)
       this.routerList = data

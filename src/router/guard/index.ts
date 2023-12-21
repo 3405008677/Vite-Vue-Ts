@@ -1,6 +1,7 @@
 import type { Router } from 'vue-router'
-import { getToken, getRouterNameList, getRouterList } from '@/utils/auth'
+import { getToken, getRouterList } from '@/utils/auth'
 import nProgress from 'nprogress'
+import { addRouterList } from '../index'
 import { userStore } from '@/store'
 import { ElNotification, ElLoading } from 'element-plus'
 
@@ -27,11 +28,16 @@ export function beforeEach(router: Router) {
         return next(from.path)
       }
       // 判断路由是否存在
-      if (router.hasRoute(to.name!)) return next(from.path)
+      if (router.hasRoute(to.name!)) return next()
       // 判断本地是否有路由，如果有路由则是因为刷新导致路由丢失，重新渲染
-      let localRouter = getRouterNameList()
-      if (getRouterList() && localRouter.includes(to.path)) {
-        userStore.getRouterList(userStore.userInfo.uid).then((res) => {
+      let localRouter = getRouterList() as RouteRule[]
+      let isRouter: boolean = false
+      localRouter.forEach((item) => {
+        if (item.name === to.path) isRouter = true
+      })
+      if (isRouter) {
+        userStore.getRouterList().then((res) => {
+          addRouterList(localRouter)
           return next({ path: to.fullPath, replace: true, query: to.query })
         })
       } else {
@@ -53,16 +59,19 @@ export function beforeEach(router: Router) {
         return next('login')
       }
       //如果当前路由需要不登录
-      if (to.meta.needLogin === false) return next()
-      ElNotification({
-        title: 'token过期',
-        message: '请重新登录',
-        type: 'error',
-      })
-      return next({
-        path: '/login',
-        query: { redirect: to.fullPath },
-      })
+      if (to.meta.needLogin === false) {
+        return next()
+      } else {
+        ElNotification({
+          title: 'token过期',
+          message: '请重新登录',
+          type: 'error',
+        })
+        return next({
+          path: '/login',
+          query: { redirect: to.fullPath },
+        })
+      }
     }
   })
 }

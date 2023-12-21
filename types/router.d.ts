@@ -1,6 +1,10 @@
 export {}
 declare global {
   interface RouteMeta {
+    iframeUrl?: string
+    isTab?: boolean
+    isDynamic?: boolean
+    menuId?: number
     title?: string
     icon?: string
     needLogin?: boolean
@@ -15,13 +19,26 @@ declare global {
     children?: Array<RouteRule>
   }
   interface MyRouter {
-    menuId: string
-    roleId: number
-    parentId: string
-    name: string
-    type: number
-    icon: string
+    pid: number
     path: string
-    children: Array<MyRouter>
+    component: string
+    icon: string
+    title: string
+    keepAlive: number
+    father: number
+    type: 'teacher' | 'admin'
+  }
+  interface MyRouterTwo {
+    icon: string
+    list: MyRouterTwo[]
+    menuId: number
+    name: string
+    open: any
+    orderNum: number
+    parentId: number
+    parentName: any
+    perms: any
+    type: number
+    url: string
   }
 }
