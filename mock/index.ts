@@ -33,16 +33,17 @@ if (import.meta.env.VITE_USE_MOCK === 'true') {
       data: [
         {
           menuId: 1,
-          name: '主页',
-          list: [],
+          name: '主页', // 左边导航对应名称
+          list: [], // 有list则表示二级路由  没有则表示一级路由
           open: null,
           orderNum: 0,
           parentId: 0,
           parentName: null,
           perms: null,
+          keepAlive: false, // 页面是否支持keepAlive缓存
           type: 0,
-          icon: 'system',
-          url: 'demo/home/index',
+          icon: 'system', // 菜单图标
+          url: 'demo/home/index', // 对应文件路径
         },
         {
           icon: 'system',
@@ -52,6 +53,7 @@ if (import.meta.env.VITE_USE_MOCK === 'true') {
               list: [],
               menuId: 2,
               name: '管理员管理',
+              keepAlive: false,
               open: null,
               orderNum: 0,
               parentId: 0,
@@ -66,6 +68,7 @@ if (import.meta.env.VITE_USE_MOCK === 'true') {
           open: null,
           orderNum: 0,
           parentId: 0,
+          keepAlive: false,
           parentName: null,
           perms: null,
           type: 0,
