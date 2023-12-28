@@ -24,7 +24,7 @@ declare global {
     component: string
     icon: string
     title: string
-    keepAlive: number
+    keepAlive: boolean
     father: number
     type: 'teacher' | 'admin'
   }
@@ -37,6 +37,7 @@ declare global {
     orderNum: number
     parentId: number
     parentName: any
+    keepAlive: boolean
     perms: any
     type: number
     url: string

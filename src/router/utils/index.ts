@@ -39,6 +39,7 @@ export const formattingRouter = (router: Array<MyRouterTwo>) => {
     route.path = '/' + item.url
     route.name = '/' + item.url
     route.meta = {
+      keepAlive: item.keepAlive,
       menuId: item.menuId,
       title: item.name,
       isDynamic: true,
