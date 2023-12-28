@@ -36,8 +36,8 @@ export const formattingRouter = (router: Array<MyRouterTwo>) => {
   let temp: Array<RouteRule> = []
   router.forEach((item, index) => {
     let route = {} as RouteRule
-    route.path = item.url?.replace('/', '-')
-    route.name = item.url?.replace('/', '-')
+    route.path = '/' + item.url
+    route.name = '/' + item.url
     route.meta = {
       menuId: item.menuId,
       title: item.name,
@@ -52,7 +52,7 @@ export const formattingRouter = (router: Array<MyRouterTwo>) => {
       route.meta.iframeUrl = item.url
     } else {
       try {
-        route.component = _import[`${item.url}`] || null
+        route.component = _import[`/src/views/${item.url}.vue`] || null
       } catch (e) {
         console.log('未找到该文件', e)
       }

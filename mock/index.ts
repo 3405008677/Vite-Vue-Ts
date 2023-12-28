@@ -32,6 +32,19 @@ if (import.meta.env.VITE_USE_MOCK === 'true') {
       code: 200,
       data: [
         {
+          menuId: 1,
+          name: '主页',
+          list: [],
+          open: null,
+          orderNum: 0,
+          parentId: 0,
+          parentName: null,
+          perms: null,
+          type: 0,
+          icon: 'system',
+          url: 'demo/home/index',
+        },
+        {
           icon: 'system',
           list: [
             {
@@ -45,7 +58,7 @@ if (import.meta.env.VITE_USE_MOCK === 'true') {
               parentName: null,
               perms: null,
               type: 1,
-              url: 'dom/user',
+              url: 'demo/user/registerUser',
             },
           ],
           menuId: 1,
@@ -56,7 +69,7 @@ if (import.meta.env.VITE_USE_MOCK === 'true') {
           parentName: null,
           perms: null,
           type: 0,
-          url: '',
+          url: 'demo/',
         },
       ],
     }

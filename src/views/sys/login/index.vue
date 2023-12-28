@@ -148,7 +148,7 @@
     if (route.query.redirect) {
       router.replace(route.query.redirect as string)
     } else {
-      router.replace('/home')
+      router.replace('/demo/home/index')
     }
     ElNotification({
       title: '登录成功',
