@@ -12,7 +12,7 @@ import type { LoginType } from '@/api/login/rule'
 import loginApi from '@/api/login'
 import userApi from '@/api/user'
 import { defineStore } from 'pinia'
-import { Session } from '@/utils/storage'
+import { Session } from '@/utils/storage/storage'
 import { resetRouter, addRouterList } from '@/router/index'
 import { formattingRouter } from '@/router/utils'
 import {

@@ -12,6 +12,8 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
+    "declaration": true,
+    "declarationDir": "/types/",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],

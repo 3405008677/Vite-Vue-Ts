@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { Session } from './storage'
+import { Session } from './storage/storage'
 
 //storage basic info
 const setUserInfo = (info: Object) => {
