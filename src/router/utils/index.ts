@@ -1,4 +1,5 @@
 const _import = import.meta.glob('/src/views/**/**.vue')
+import storage from '@/utils/core/storage'
 
 /**
  * alter URL also add params
@@ -21,6 +22,7 @@ export const changeUrl = (url: string, key: string, keyVal: string) => {
     }
   }
 }
+
 // 判断是否为 HTTP || HTTPS
 function isHttpOrHttps(str: string) {
   if (str) {
@@ -66,30 +68,11 @@ export const formattingRouter = (router: Array<MyRouterTwo>) => {
   })
   return temp
 }
-// export const formattingRouter = (router: Array<MyRouter>, father?: number) => {
-//   let temp: Array<RouteRule> = []
-//   router.forEach((item,index)=>{
-//     let v = {} as RouteRule
-//     v.meta = {}
-//     v.path = item.path
-//     v.name = item.path
-//     v.meta.icon = item.icon
-//     v.meta!.keepAlive = item.keepAlive ? true : false
-//     v.meta!.title = item.title
-//     v.meta!.needLogin = true
-//     v.children = []
-//     v.component = _import[`/src/views${item.component}/index.vue`]
-//     if(item.father === 0 && father === undefined){
-//       temp.push(v)
-//     }else{
-//       v.children.push(formattingRouter(router,item.pid) as unknown  as RouteRule)
-//     }
-//     // 递归了
-//     if(!father === undefined){
-//       if(father === item.father){
-//       return v
-//       }
-//     }
-//   })
-//   return temp
-// }
+
+/**
+ * 清除认证信息
+ */
+export function clearAuthStorage(): void {
+  storage.localStorage.clear()
+  storage.sessionStorage.clear()
+}

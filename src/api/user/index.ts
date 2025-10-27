@@ -1,5 +1,4 @@
-// import { Login } from './rule'
-import request from '@/utils/request'
+import request from '@/service'
 
 /**
  * 获取指定用户信息

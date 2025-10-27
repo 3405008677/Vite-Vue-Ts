@@ -9,8 +9,8 @@ import type { App } from 'vue'
 
 export default (app: App) => {
   app.directive('go-top', {
-    mounted(el, binding, vnode) {
-      console.log(el, binding, 'el')
+    mounted(el, binding) {
+      // console.log(el, binding, 'el')
       el.style.display = 'none'
       el.style.position = 'fixed'
       el.style.right = '100px'
@@ -27,7 +27,7 @@ export default (app: App) => {
       dom?.addEventListener('scroll', setScroll)
       el.__vueGoTopHandler__ = setScroll
 
-      function setScroll (event: Event) {
+      function setScroll(event: Event) {
         let scrollTop = (event.target as HTMLDivElement)?.scrollTop || 10
         if (scrollTop > 300) {
           el.style.display = 'block'
@@ -45,9 +45,8 @@ export default (app: App) => {
         }
       }
     },
-    beforeUnmount(el, binding, vnode) {
+    beforeUnmount(el, binding) {
       document.querySelector(binding.value)?.removeEventListener('scroll', el.__vueGoTopHandler__)
-    }
+    },
   })
 }
-

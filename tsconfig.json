@@ -2,38 +2,35 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "useDefineForClassFields": true,
-    "strict": true,
-    "jsx": "preserve",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
+    "noImplicitAny": false, // 不允许隐式的 any 类型
+    "removeComments": true, // 删除注释
+    "preserveConstEnums": true, // 保留 const 和 enum 声明
     "skipLibCheck": true,
+    "allowJs": true,
+    "ignoreDeprecations": "5.0",
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    // "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
     "noEmit": true,
-    "declaration": true,
-    "declarationDir": "/types/",
+    "esModuleInterop": true, 
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "#/*": ["./types/*"]
-    },
-    "types": ["vite/client"]
+    }
   },
-
-  "include": [
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "build/**/*.ts",
-    "build/**/*.d.ts",
-    "types/**/*.ts",
-    "types/**/*.d.ts",
-    "vite.config.ts"
-  ],
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "build/**/*.ts", "build/**/*.d.ts", "types/**/*.ts", "types/**/*.d.ts"],
   "exclude": ["node_modules", "dist", "**/*.js"]
-  // "references": [{ "path": "./tsconfig.node.json" }]
 }

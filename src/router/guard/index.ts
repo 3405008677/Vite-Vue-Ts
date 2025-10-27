@@ -1,5 +1,5 @@
 import type { Router } from 'vue-router'
-import { getToken, getRouterList } from '@/utils/auth'
+import storage from '@/utils/core/storage'
 import nProgress from 'nprogress'
 import { addRouterList } from '../index'
 import { userStore } from '@/store'
@@ -17,7 +17,7 @@ export function beforeEach(router: Router) {
     loading = ElLoading.service({
       text: '拼命加载中...',
     })
-    const token = getToken()
+    const token = storage.localStorage.get('TOKEN') || ''
     if (token) {
       if (to.path === '/login') {
         ElNotification({
@@ -30,7 +30,7 @@ export function beforeEach(router: Router) {
       // 判断路由是否存在
       if (router.hasRoute(to.name!)) return next()
       // 判断本地是否有路由，如果有路由则是因为刷新导致路由丢失，重新渲染
-      let localRouter = getRouterList() as RouteRule[]
+      let localRouter = JSON.parse(storage.localStorage.get('ROUTER_LIST') || '[]') as RouteRule[]
       let isRouter: boolean = false
       localRouter.forEach((item) => {
         if (item.name === to.path) isRouter = true

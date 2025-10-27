@@ -1,12 +1,13 @@
 {
-  "printWidth": 100,
+  "printWidth": 160,
   "semi": false,
-  "vueIndentScriptAndStyle": true,
+  "vueIndentScriptAndStyle": false,
   "singleQuote": true,
   "trailingComma": "all",
   "proseWrap": "never",
   "htmlWhitespaceSensitivity": "strict",
   "endOfLine": "auto",
   "bracketSpacing": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "useTabs": false
 }

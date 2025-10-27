@@ -1,5 +1,5 @@
 import { LoginType } from './rule'
-import request from '@/utils/request'
+import request from '@/service'
 
 /**
  * 登录

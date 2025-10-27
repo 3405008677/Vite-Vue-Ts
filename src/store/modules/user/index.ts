@@ -12,17 +12,10 @@ import type { LoginType } from '@/api/login/rule'
 import loginApi from '@/api/login'
 import userApi from '@/api/user'
 import { defineStore } from 'pinia'
-import { Session } from '@/utils/storage/storage'
+import storage from '@/utils/core/storage'
 import { resetRouter, addRouterList } from '@/router/index'
 import { formattingRouter } from '@/router/utils'
-import {
-  getToken,
-  getUserInfo,
-  setToken,
-  setUserInfo,
-  setRouterList,
-  getRouterList,
-} from '@/utils/auth'
+
 let routerere = [
   {
     icon: 'system',
@@ -55,9 +48,9 @@ let routerere = [
 export default defineStore('user', {
   state: (): UserState => {
     return {
-      token: getToken(),
-      userInfo: getUserInfo(),
-      routerList: getRouterList(),
+      token: storage.localStorage.get('TOKEN') || '',
+      userInfo: JSON.parse(storage.localStorage.get('USER_INFO') || '{}'),
+      routerList: JSON.parse(storage.localStorage.get('ROUTER_LIST') || '[]') || routerere,
     }
   },
   actions: {
@@ -66,14 +59,14 @@ export default defineStore('user', {
       const { username, password } = userinfo
       let { data } = await loginApi.login({ username: username.trim(), password: password.trim() })
       this.token = data.token
-      setToken(data.token)
+      storage.localStorage.set('TOKEN', data.token)
       await this.getInfo()
       await this.getRouterList()
     },
     // 退出
     async logout() {
       this.token = ''
-      Session.clear()
+      storage.localStorage.clear()
       resetRouter()
       location.reload()
     },
@@ -81,7 +74,7 @@ export default defineStore('user', {
     async getInfo() {
       let { data } = await userApi.getUserInfoApi()
       this.userInfo = data
-      setUserInfo(data)
+      storage.localStorage.set('USER_INFO', JSON.stringify(data))
     },
     // 获取管理员路由
     async getRouterList() {
@@ -89,7 +82,7 @@ export default defineStore('user', {
       data = formattingRouter(data)
       console.log(data)
       addRouterList(data)
-      setRouterList(data)
+      storage.localStorage.set('ROUTER_LIST', JSON.stringify(data))
       this.routerList = data
     },
   },

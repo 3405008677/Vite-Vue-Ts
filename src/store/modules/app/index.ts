@@ -1,6 +1,10 @@
+import type { REQUEST_MANAGER_TYPE } from '@/utils/core/requestManager'
+import RequestManager from '@/utils/core/requestManager'
+
 export interface AppState {
   isCollapseAside: boolean
   collapseTitle: string
+  abortController: REQUEST_MANAGER_TYPE
 }
 import { defineStore } from 'pinia'
 export default defineStore('app', {
@@ -8,6 +12,7 @@ export default defineStore('app', {
     return {
       isCollapseAside: false, // 是否隐藏侧导航
       collapseTitle: import.meta.env.VITE_GLOB_APP_TITLE,
+      abortController: RequestManager,
     }
   },
   actions: {

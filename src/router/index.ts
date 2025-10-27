@@ -11,6 +11,7 @@ const getWhiteStaticRouters = (array: any[]) => {
     getWhiteStaticRouters(item.children || [])
   })
 }
+
 getWhiteStaticRouters(staticRoutes)
 // create a router
 export const router = createRouter({
@@ -18,6 +19,7 @@ export const router = createRouter({
   routes: staticRoutes,
   strict: true,
 })
+
 /**
  * addition router list
  */
